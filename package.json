@@ -1,6 +1,6 @@
 {
   "name": "hstack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HyperStack CLI - Manage GPU instances, VMs, and tunnels",
   "main": "dist/cli.js",
   "bin": {
