@@ -154,7 +154,7 @@ Users can install globally:
 ```bash
 npm install -g /path/to/hstack
 # or from a published package
-npm install -g @lleulabs/hstack
+npm install -g hstack
 ```
 
 This makes `hstack` available system-wide.

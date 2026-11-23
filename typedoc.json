@@ -17,7 +17,7 @@
   "outputs": [
     {
       "name": "clean-jsdoc-theme",
-      "path": "docs/api"
+      "path": "docs"
     }
   ],
   "plugin": ["@clean-jsdoc-theme/typedoc"],

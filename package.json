@@ -11,8 +11,11 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build:watch": "tsc --watch",
+    "build:clean": "rm -rf dist",
     "docs": "typedoc",
-    "docs:serve": "python3 -m http.server 3000 --directory docs/api",
+    "docs:serve": "python3 -m http.server 3000 --directory docs",
+    "docs:clean": "rm -rf ./docs",
     "hstack": "node ./dist/cli",
     "test": "vitest",
     "test:run": "vitest run"
@@ -26,14 +29,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lleulabs/hstack"
+    "url": "https://github.com/Robert-Fairley/hyperstack-cli"
   },
   "engines": {
     "node": ">=20"
   },
   "author": {
     "name": "Robert Fairley",
-    "email": "rob@lleulabs.com"
+    "email": "rob@hyperstack.cloud"
   },
   "type": "module",
   "devDependencies": {
