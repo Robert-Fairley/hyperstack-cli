@@ -67,7 +67,15 @@ hs tunnel my-vm 8000 8000  # localhost:8000 → VM:8000
 - [AGENTS.md](./AGENTS.md) — Agent context and architecture overview
 - [DEVELOPMENT.md](./DEVELOPMENT.md) — Developer notes, API reference, contributing guide
 
+## Legal Disclaimer
+
+This software is provided "as is" without warranty of any kind, express or implied. The authors and contributors are not responsible for any data loss, service disruption, or financial damage resulting from the use of this tool.
+
+Use at your own risk. Always verify API responses and command effects before executing destructive operations (e.g., hibernate, delete).
+
 ## License
 
-Private — © Robert Fairley / lleulabs
+[MIT License](LICENSE) • Free Software
+
+© 2026 Lleu Labs Inc. / Robert Fairley
 
