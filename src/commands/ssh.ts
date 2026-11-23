@@ -36,6 +36,9 @@ export async function tunnelVm(
     `-L 127.0.0.1:${localPort}:127.0.0.1:${remotePort}`,
   ];
 
+  console.log(`Tunneling 127.0.0.1:${localPort} → ${user}@${ip}:${remotePort}`);
+  console.log("Press Ctrl+C to stop the tunnel.");
+
   const child = spawn("ssh", buildSshArgs(tunnelArgs, `${user}@${ip}`), {
     stdio: "inherit",
   });
