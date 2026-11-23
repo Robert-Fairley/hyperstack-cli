@@ -14,7 +14,7 @@ description: Current credit balance response.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L161" label="types.ts:161" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L161" label="types.ts:161" />
 
 Current credit balance response.
 
@@ -24,8 +24,8 @@ Current credit balance response.
 
 <MemberHeading id="balance" depth="3" name="balance" sig="balance: number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L162" sourceLabel="types.ts:162" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L162" sourceLabel="types.ts:162" />
 
 <MemberHeading id="currency" depth="3" name="currency" sig="currency: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L163" sourceLabel="types.ts:163" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L163" sourceLabel="types.ts:163" />

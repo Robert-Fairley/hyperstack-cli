@@ -13,7 +13,7 @@ description: Query GPU stock with optional filtering by region, GPU model, and a
 ): Promise<void>"
 />
 
-<SourceLink href="/source/commands/stock-ts/#L29" label="stock.ts:29" />
+<SourceLink href="/hyperstack-cli/source/commands/stock-ts/#L29" label="stock.ts:29" />
 
 **Modifiers:** `async`
 

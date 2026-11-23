@@ -9,7 +9,7 @@ description: Check account credit balance. Displays current balance and currency
 
 <Signature code="checkCredit(): Promise<void>" />
 
-<SourceLink href="/source/commands/billing-ts/#L34" label="billing.ts:34" />
+<SourceLink href="/hyperstack-cli/source/commands/billing-ts/#L34" label="billing.ts:34" />
 
 **Modifiers:** `async`
 

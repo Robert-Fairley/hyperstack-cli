@@ -16,7 +16,7 @@ description: Create an SSH tunnel from a local port to a remote port on a VM. Pr
 ): Promise<void>"
 />
 
-<SourceLink href="/source/commands/ssh-ts/#L36" label="ssh.ts:36" />
+<SourceLink href="/hyperstack-cli/source/commands/ssh-ts/#L36" label="ssh.ts:36" />
 
 **Modifiers:** `async`
 

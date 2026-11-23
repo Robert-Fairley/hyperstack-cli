@@ -16,7 +16,7 @@ description: An object storage bucket.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L181" label="types.ts:181" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L181" label="types.ts:181" />
 
 An object storage bucket.
 
@@ -26,16 +26,16 @@ An object storage bucket.
 
 <MemberHeading id="createdat" depth="3" name="created_at" sig="created_at: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L185" sourceLabel="types.ts:185" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L185" sourceLabel="types.ts:185" />
 
 <MemberHeading id="id" depth="3" name="id" sig="id: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L182" sourceLabel="types.ts:182" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L182" sourceLabel="types.ts:182" />
 
 <MemberHeading id="name" depth="3" name="name" sig="name: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L183" sourceLabel="types.ts:183" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L183" sourceLabel="types.ts:183" />
 
 <MemberHeading id="region" depth="3" name="region" sig="region: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L184" sourceLabel="types.ts:184" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L184" sourceLabel="types.ts:184" />

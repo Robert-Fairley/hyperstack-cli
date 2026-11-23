@@ -9,7 +9,7 @@ description: Delete an object storage bucket.
 
 <Signature code="deleteBucket(name: string): Promise<void>" />
 
-<SourceLink href="/source/commands/storage-ts/#L64" label="storage.ts:64" />
+<SourceLink href="/hyperstack-cli/source/commands/storage-ts/#L64" label="storage.ts:64" />
 
 **Modifiers:** `async`
 

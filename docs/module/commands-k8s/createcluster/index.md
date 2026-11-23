@@ -13,7 +13,7 @@ description: Create a new Kubernetes cluster.
 ): Promise<void>"
 />
 
-<SourceLink href="/source/commands/k8s-ts/#L52" label="k8s.ts:52" />
+<SourceLink href="/hyperstack-cli/source/commands/k8s-ts/#L52" label="k8s.ts:52" />
 
 **Modifiers:** `async`
 

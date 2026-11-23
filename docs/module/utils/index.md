@@ -6,14 +6,14 @@ longname: module:utils
 
 # utils
 
-<SourceLink href="/source/utils-ts/#L8" label="utils.ts:8" />
+<SourceLink href="/hyperstack-cli/source/utils-ts/#L8" label="utils.ts:8" />
 
 ---
 
 ## Functions
 
-- [`buildSshArgs`](/module/utils/buildsshargs)
-- [`extractVmIp`](/module/utils/extractvmip)
-- [`extractVmList`](/module/utils/extractvmlist)
-- [`formatConfigs`](/module/utils/formatconfigs)
-- [`getSshKey`](/module/utils/getsshkey)
+- [`buildSshArgs`](/hyperstack-cli/module/utils/buildsshargs)
+- [`extractVmIp`](/hyperstack-cli/module/utils/extractvmip)
+- [`extractVmList`](/hyperstack-cli/module/utils/extractvmlist)
+- [`formatConfigs`](/hyperstack-cli/module/utils/formatconfigs)
+- [`getSshKey`](/hyperstack-cli/module/utils/getsshkey)

@@ -9,7 +9,7 @@ description: Delete a Kubernetes cluster.
 
 <Signature code="deleteCluster(clusterId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/k8s-ts/#L74" label="k8s.ts:74" />
+<SourceLink href="/hyperstack-cli/source/commands/k8s-ts/#L74" label="k8s.ts:74" />
 
 **Modifiers:** `async`
 

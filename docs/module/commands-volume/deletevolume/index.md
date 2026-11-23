@@ -9,7 +9,7 @@ description: Delete a volume.
 
 <Signature code="deleteVolume(volumeId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/volume-ts/#L97" label="volume.ts:97" />
+<SourceLink href="/hyperstack-cli/source/commands/volume-ts/#L97" label="volume.ts:97" />
 
 **Modifiers:** `async`
 

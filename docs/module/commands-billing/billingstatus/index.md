@@ -9,7 +9,7 @@ description: Get account billing status (alive check). Returns raw API response 
 
 <Signature code="billingStatus(): Promise<void>" />
 
-<SourceLink href="/source/commands/billing-ts/#L51" label="billing.ts:51" />
+<SourceLink href="/hyperstack-cli/source/commands/billing-ts/#L51" label="billing.ts:51" />
 
 **Modifiers:** `async`
 

@@ -9,7 +9,7 @@ description: Attach a volume to a VM.
 
 <Signature code="attachVolume(volumeId: string, vmId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/volume-ts/#L74" label="volume.ts:74" />
+<SourceLink href="/hyperstack-cli/source/commands/volume-ts/#L74" label="volume.ts:74" />
 
 **Modifiers:** `async`
 

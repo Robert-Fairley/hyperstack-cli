@@ -9,7 +9,7 @@ description: Build an SSH arguments array with optional key file and extra flags
 
 <Signature code="buildSshArgs(extraArgs: string[], target: string): string[]" />
 
-<SourceLink href="/source/utils-ts/#L26" label="utils.ts:26" />
+<SourceLink href="/hyperstack-cli/source/utils-ts/#L26" label="utils.ts:26" />
 
 Build an SSH arguments array with optional key file and extra flags.
 

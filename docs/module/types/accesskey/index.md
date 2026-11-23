@@ -17,7 +17,7 @@ description: An S3-compatible access key pair.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L189" label="types.ts:189" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L189" label="types.ts:189" />
 
 An S3-compatible access key pair.
 
@@ -27,20 +27,20 @@ An S3-compatible access key pair.
 
 <MemberHeading id="accesskeyid" depth="3" name="access_key_id" sig="access_key_id: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L191" sourceLabel="types.ts:191" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L191" sourceLabel="types.ts:191" />
 
 <MemberHeading id="bucketname" depth="3" name="bucket_name" sig="bucket_name: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L193" sourceLabel="types.ts:193" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L193" sourceLabel="types.ts:193" />
 
 <MemberHeading id="id" depth="3" name="id" sig="id: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L190" sourceLabel="types.ts:190" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L190" sourceLabel="types.ts:190" />
 
 <MemberHeading id="secretaccesskey" depth="3" name="secret_access_key" sig="secret_access_key: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L192" sourceLabel="types.ts:192" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L192" sourceLabel="types.ts:192" />
 
 <MemberHeading id="status" depth="3" name="status" sig="status: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L194" sourceLabel="types.ts:194" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L194" sourceLabel="types.ts:194" />

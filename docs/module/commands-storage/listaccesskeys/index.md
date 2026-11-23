@@ -9,7 +9,7 @@ description: List S3-compatible access keys in a table format. Displays id, acce
 
 <Signature code="listAccessKeys(): Promise<void>" />
 
-<SourceLink href="/source/commands/storage-ts/#L74" label="storage.ts:74" />
+<SourceLink href="/hyperstack-cli/source/commands/storage-ts/#L74" label="storage.ts:74" />
 
 **Modifiers:** `async`
 

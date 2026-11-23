@@ -6,14 +6,14 @@ longname: module:commands/volume
 
 # commands/volume
 
-<SourceLink href="/source/commands/volume-ts/#L11" label="volume.ts:11" />
+<SourceLink href="/hyperstack-cli/source/commands/volume-ts/#L11" label="volume.ts:11" />
 
 ---
 
 ## Functions
 
-- [`attachVolume`](/module/commands-volume/attachvolume)
-- [`createVolume`](/module/commands-volume/createvolume)
-- [`deleteVolume`](/module/commands-volume/deletevolume)
-- [`detachVolume`](/module/commands-volume/detachvolume)
-- [`listVolumes`](/module/commands-volume/listvolumes)
+- [`attachVolume`](/hyperstack-cli/module/commands-volume/attachvolume)
+- [`createVolume`](/hyperstack-cli/module/commands-volume/createvolume)
+- [`deleteVolume`](/hyperstack-cli/module/commands-volume/deletevolume)
+- [`detachVolume`](/hyperstack-cli/module/commands-volume/detachvolume)
+- [`listVolumes`](/hyperstack-cli/module/commands-volume/listvolumes)

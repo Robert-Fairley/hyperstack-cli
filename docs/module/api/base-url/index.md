@@ -9,7 +9,7 @@ description: Base URL for the HyperStack REST API.
 
 <Signature code="BASE_URL: 'https://infrahub-api.nexgencloud.com/v1'" />
 
-<SourceLink href="/source/api-ts/#L13" label="api.ts:13" />
+<SourceLink href="/hyperstack-cli/source/api-ts/#L13" label="api.ts:13" />
 
 Base URL for the HyperStack REST API.
 

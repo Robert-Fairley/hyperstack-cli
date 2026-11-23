@@ -9,7 +9,7 @@ description: List firewalls for a VM or all firewalls globally. Displays rules i
 
 <Signature code="listFirewalls(vmId?: string): Promise<void>" />
 
-<SourceLink href="/source/commands/firewall-ts/#L26" label="firewall.ts:26" />
+<SourceLink href="/hyperstack-cli/source/commands/firewall-ts/#L26" label="firewall.ts:26" />
 
 **Modifiers:** `async`
 

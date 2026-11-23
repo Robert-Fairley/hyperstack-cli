@@ -6,10 +6,10 @@ longname: module:commands/stock
 
 # commands/stock
 
-<SourceLink href="/source/commands/stock-ts/#L9" label="stock.ts:9" />
+<SourceLink href="/hyperstack-cli/source/commands/stock-ts/#L9" label="stock.ts:9" />
 
 ---
 
 ## Functions
 
-- [`queryStock`](/module/commands-stock/querystock)
+- [`queryStock`](/hyperstack-cli/module/commands-stock/querystock)

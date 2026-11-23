@@ -9,7 +9,7 @@ description: Create a snapshot from a VM's disk.
 
 <Signature code="createSnapshot(vmId: string, name?: string): Promise<void>" />
 
-<SourceLink href="/source/commands/snapshot-ts/#L47" label="snapshot.ts:47" />
+<SourceLink href="/hyperstack-cli/source/commands/snapshot-ts/#L47" label="snapshot.ts:47" />
 
 **Modifiers:** `async`
 

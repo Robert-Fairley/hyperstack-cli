@@ -25,6 +25,7 @@
   "includeVersion": true,
   "hideGenerator": false,
   "cleanJsdocTheme": {
-    "siteName": "hstack"
+    "siteName": "hstack",
+    "basePath": "/hyperstack-cli"
   }
 }

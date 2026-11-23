@@ -9,7 +9,7 @@ description: List Kubernetes clusters in a table format. Displays id, name, stat
 
 <Signature code="listClusters(): Promise<void>" />
 
-<SourceLink href="/source/commands/k8s-ts/#L26" label="k8s.ts:26" />
+<SourceLink href="/hyperstack-cli/source/commands/k8s-ts/#L26" label="k8s.ts:26" />
 
 **Modifiers:** `async`
 

@@ -13,7 +13,7 @@ description: Create a new virtual machine.
 ): Promise<void>"
 />
 
-<SourceLink href="/source/commands/vm-create-ts/#L103" label="vm-create.ts:103" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-create-ts/#L103" label="vm-create.ts:103" />
 
 **Modifiers:** `async`
 

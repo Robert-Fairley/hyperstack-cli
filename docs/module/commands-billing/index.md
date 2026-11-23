@@ -6,13 +6,13 @@ longname: module:commands/billing
 
 # commands/billing
 
-<SourceLink href="/source/commands/billing-ts/#L14" label="billing.ts:14" />
+<SourceLink href="/hyperstack-cli/source/commands/billing-ts/#L14" label="billing.ts:14" />
 
 ---
 
 ## Functions
 
-- [`billingStatus`](/module/commands-billing/billingstatus)
-- [`checkCredit`](/module/commands-billing/checkcredit)
-- [`getDashboard`](/module/commands-billing/getdashboard)
-- [`listUsage`](/module/commands-billing/listusage)
+- [`billingStatus`](/hyperstack-cli/module/commands-billing/billingstatus)
+- [`checkCredit`](/hyperstack-cli/module/commands-billing/checkcredit)
+- [`getDashboard`](/hyperstack-cli/module/commands-billing/getdashboard)
+- [`listUsage`](/hyperstack-cli/module/commands-billing/listusage)

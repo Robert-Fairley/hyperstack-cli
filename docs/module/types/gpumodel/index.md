@@ -16,7 +16,7 @@ description: A GPU model entry from the stock API.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L53" label="types.ts:53" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L53" label="types.ts:53" />
 
 A GPU model entry from the stock API.
 
@@ -26,16 +26,16 @@ A GPU model entry from the stock API.
 
 <MemberHeading id="available" depth="3" name="available" sig="available: string | number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L56" sourceLabel="types.ts:56" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L56" sourceLabel="types.ts:56" />
 
 <MemberHeading id="configurations" depth="3" name="configurations" sig="configurations: Record<string, number>" />
 
-<MemberMeta sourceHref="/source/types-ts/#L57" sourceLabel="types.ts:57" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L57" sourceLabel="types.ts:57" />
 
 <MemberHeading id="model" depth="3" name="model" sig="model: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L54" sourceLabel="types.ts:54" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L54" sourceLabel="types.ts:54" />
 
 <MemberHeading id="name" depth="3" name="name" sig="name: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L55" sourceLabel="types.ts:55" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L55" sourceLabel="types.ts:55" />

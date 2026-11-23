@@ -9,13 +9,13 @@ description: Extract the public IP address from a VM object. Checks floating_ip 
 
 <Signature code="extractVmIp(vm: VmInstance): string | undefined" />
 
-<SourceLink href="/source/utils-ts/#L52" label="utils.ts:52" />
+<SourceLink href="/hyperstack-cli/source/utils-ts/#L52" label="utils.ts:52" />
 
 Extract the public IP address from a VM object. Checks `floating_ip`, `public_ip`, and `ip_address` in order.
 
 **Parameters**
 
-- `vm` ([VmInstance](/module/types/vminstance)) — — A VM instance object.
+- `vm` ([VmInstance](/hyperstack-cli/module/types/vminstance)) — — A VM instance object.
 
 **Returns**
 

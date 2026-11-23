@@ -9,7 +9,7 @@ description: List available regions for VM deployment. Displays id, name, and st
 
 <Signature code="listRegions(): Promise<void>" />
 
-<SourceLink href="/source/commands/vm-create-ts/#L77" label="vm-create.ts:77" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-create-ts/#L77" label="vm-create.ts:77" />
 
 **Modifiers:** `async`
 

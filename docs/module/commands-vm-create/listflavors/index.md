@@ -9,7 +9,7 @@ description: List available flavors (hardware configurations). Displays id, name
 
 <Signature code="listFlavors(): Promise<void>" />
 
-<SourceLink href="/source/commands/vm-create-ts/#L36" label="vm-create.ts:36" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-create-ts/#L36" label="vm-create.ts:36" />
 
 **Modifiers:** `async`
 

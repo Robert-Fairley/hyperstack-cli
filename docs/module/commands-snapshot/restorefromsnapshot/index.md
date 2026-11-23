@@ -9,7 +9,7 @@ description: Restore a VM from a snapshot.
 
 <Signature code="restoreFromSnapshot(snapshotId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/snapshot-ts/#L61" label="snapshot.ts:61" />
+<SourceLink href="/hyperstack-cli/source/commands/snapshot-ts/#L61" label="snapshot.ts:61" />
 
 **Modifiers:** `async`
 

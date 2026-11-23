@@ -6,13 +6,13 @@ longname: module:commands/vm
 
 # commands/vm
 
-<SourceLink href="/source/commands/vm-ts/#L10" label="vm.ts:10" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-ts/#L10" label="vm.ts:10" />
 
 ---
 
 ## Functions
 
-- [`getVmIp`](/module/commands-vm/getvmip)
-- [`hibernateVm`](/module/commands-vm/hibernatevm)
-- [`listVms`](/module/commands-vm/listvms)
-- [`restoreVm`](/module/commands-vm/restorevm)
+- [`getVmIp`](/hyperstack-cli/module/commands-vm/getvmip)
+- [`hibernateVm`](/hyperstack-cli/module/commands-vm/hibernatevm)
+- [`listVms`](/hyperstack-cli/module/commands-vm/listvms)
+- [`restoreVm`](/hyperstack-cli/module/commands-vm/restorevm)

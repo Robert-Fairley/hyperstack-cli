@@ -9,7 +9,7 @@ description: Delete a snapshot.
 
 <Signature code="deleteSnapshot(snapshotId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/snapshot-ts/#L71" label="snapshot.ts:71" />
+<SourceLink href="/hyperstack-cli/source/commands/snapshot-ts/#L71" label="snapshot.ts:71" />
 
 **Modifiers:** `async`
 

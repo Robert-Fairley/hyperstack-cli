@@ -9,7 +9,7 @@ description: List all disk snapshots in a table format. Displays id, name, size,
 
 <Signature code="listSnapshots(): Promise<void>" />
 
-<SourceLink href="/source/commands/snapshot-ts/#L25" label="snapshot.ts:25" />
+<SourceLink href="/hyperstack-cli/source/commands/snapshot-ts/#L25" label="snapshot.ts:25" />
 
 **Modifiers:** `async`
 

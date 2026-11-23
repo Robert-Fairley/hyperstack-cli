@@ -14,7 +14,7 @@ description: A region's GPU stock data from the stock API.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L61" label="types.ts:61" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L61" label="types.ts:61" />
 
 A region's GPU stock data from the stock API.
 
@@ -24,8 +24,8 @@ A region's GPU stock data from the stock API.
 
 <MemberHeading id="models" depth="3" name="models" sig="models: GpuModel[]" />
 
-<MemberMeta sourceHref="/source/types-ts/#L63" sourceLabel="types.ts:63" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L63" sourceLabel="types.ts:63" />
 
 <MemberHeading id="region" depth="3" name="region" sig="region: string | VmRegion" />
 
-<MemberMeta sourceHref="/source/types-ts/#L62" sourceLabel="types.ts:62" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L62" sourceLabel="types.ts:62" />

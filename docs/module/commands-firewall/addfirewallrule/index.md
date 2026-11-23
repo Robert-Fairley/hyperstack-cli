@@ -14,7 +14,7 @@ description: Add a firewall rule to a VM.
 ): Promise<void>"
 />
 
-<SourceLink href="/source/commands/firewall-ts/#L60" label="firewall.ts:60" />
+<SourceLink href="/hyperstack-cli/source/commands/firewall-ts/#L60" label="firewall.ts:60" />
 
 **Modifiers:** `async`
 
@@ -23,7 +23,7 @@ Add a firewall rule to a VM.
 **Parameters**
 
 - `vmId` (string) — — The target VM ID.
-- `opts` ({ description?: string; [port](/module/types/firewallrule#port)?: number; [protocol](/module/types/firewallrule#protocol)?: string; [source](/module/types/firewallrule#source)?: string }) — — Rule configuration options.
+- `opts` ({ description?: string; [port](/hyperstack-cli/module/types/firewallrule#port)?: number; [protocol](/hyperstack-cli/module/types/firewallrule#protocol)?: string; [source](/hyperstack-cli/module/types/firewallrule#source)?: string }) — — Rule configuration options.
 
 **Properties**
 

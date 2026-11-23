@@ -9,7 +9,7 @@ description: List available OS images for VM provisioning. Displays id, name, OS
 
 <Signature code="listImages(): Promise<void>" />
 
-<SourceLink href="/source/commands/vm-create-ts/#L58" label="vm-create.ts:58" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-create-ts/#L58" label="vm-create.ts:58" />
 
 **Modifiers:** `async`
 

@@ -9,7 +9,7 @@ description: Get the public IP address for a VM by ID or name. Tries numeric ID 
 
 <Signature code="getVmIp(vmIdOrName: string): Promise<string>" />
 
-<SourceLink href="/source/commands/vm-ts/#L80" label="vm.ts:80" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-ts/#L80" label="vm.ts:80" />
 
 **Modifiers:** `async`
 

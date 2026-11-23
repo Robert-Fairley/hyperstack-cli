@@ -15,7 +15,7 @@ description: A deployment region as returned by the API.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L133" label="types.ts:133" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L133" label="types.ts:133" />
 
 A deployment region as returned by the API.
 
@@ -25,12 +25,12 @@ A deployment region as returned by the API.
 
 <MemberHeading id="id" depth="3" name="id" sig="id: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L134" sourceLabel="types.ts:134" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L134" sourceLabel="types.ts:134" />
 
 <MemberHeading id="name" depth="3" name="name" sig="name: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L135" sourceLabel="types.ts:135" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L135" sourceLabel="types.ts:135" />
 
 <MemberHeading id="status" depth="3" name="status" sig="status: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L136" sourceLabel="types.ts:136" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L136" sourceLabel="types.ts:136" />

@@ -9,7 +9,7 @@ description: Delete a firewall rule from a VM.
 
 <Signature code="deleteFirewallRule(vmId: string, ruleId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/firewall-ts/#L81" label="firewall.ts:81" />
+<SourceLink href="/hyperstack-cli/source/commands/firewall-ts/#L81" label="firewall.ts:81" />
 
 **Modifiers:** `async`
 

@@ -9,7 +9,7 @@ description: Hibernate a VM (shut down with state preserved). Stops billing whil
 
 <Signature code="hibernateVm(vmId: string, retainIp: boolean): Promise<void>" />
 
-<SourceLink href="/source/commands/vm-ts/#L50" label="vm.ts:50" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-ts/#L50" label="vm.ts:50" />
 
 **Modifiers:** `async`
 

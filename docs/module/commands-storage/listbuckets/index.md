@@ -9,7 +9,7 @@ description: List object storage buckets in a table format. Displays name, regio
 
 <Signature code="listBuckets(): Promise<void>" />
 
-<SourceLink href="/source/commands/storage-ts/#L32" label="storage.ts:32" />
+<SourceLink href="/hyperstack-cli/source/commands/storage-ts/#L32" label="storage.ts:32" />
 
 **Modifiers:** `async`
 

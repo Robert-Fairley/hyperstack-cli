@@ -9,7 +9,7 @@ description: Create a new object storage bucket.
 
 <Signature code="createBucket(name: string, region?: string): Promise<void>" />
 
-<SourceLink href="/source/commands/storage-ts/#L51" label="storage.ts:51" />
+<SourceLink href="/hyperstack-cli/source/commands/storage-ts/#L51" label="storage.ts:51" />
 
 **Modifiers:** `async`
 

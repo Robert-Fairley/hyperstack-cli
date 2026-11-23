@@ -14,7 +14,7 @@ description: Nested wrapper for stock API responses.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L73" label="types.ts:73" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L73" label="types.ts:73" />
 
 Nested wrapper for stock API responses.
 
@@ -24,8 +24,8 @@ Nested wrapper for stock API responses.
 
 <MemberHeading id="data" depth="3" name="data" sig="data: StockRegion[]" />
 
-<MemberMeta sourceHref="/source/types-ts/#L75" sourceLabel="types.ts:75" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L75" sourceLabel="types.ts:75" />
 
 <MemberHeading id="stocks" depth="3" name="stocks" sig="stocks: StockRegion[]" />
 
-<MemberMeta sourceHref="/source/types-ts/#L74" sourceLabel="types.ts:74" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L74" sourceLabel="types.ts:74" />

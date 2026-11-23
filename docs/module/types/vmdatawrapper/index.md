@@ -15,7 +15,7 @@ description: Nested wrapper for single-VM API responses.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L37" label="types.ts:37" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L37" label="types.ts:37" />
 
 Nested wrapper for single-VM API responses.
 
@@ -25,12 +25,12 @@ Nested wrapper for single-VM API responses.
 
 <MemberHeading id="data" depth="3" name="data" sig="data: VmInstance | VmListResponse" />
 
-<MemberMeta sourceHref="/source/types-ts/#L40" sourceLabel="types.ts:40" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L40" sourceLabel="types.ts:40" />
 
 <MemberHeading id="instance" depth="3" name="instance" sig="instance: VmInstance" />
 
-<MemberMeta sourceHref="/source/types-ts/#L38" sourceLabel="types.ts:38" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L38" sourceLabel="types.ts:38" />
 
 <MemberHeading id="virtualmachine" depth="3" name="virtual_machine" sig="virtual_machine: VmInstance" />
 
-<MemberMeta sourceHref="/source/types-ts/#L39" sourceLabel="types.ts:39" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L39" sourceLabel="types.ts:39" />

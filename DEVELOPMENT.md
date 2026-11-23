@@ -97,6 +97,11 @@ npm run hstack status
 npm run hstack stock -g h100
 ```
 
+## Documentation preview
+
+Run `npm run docs` to generate the GitHub Pages site, then `npm run docs:serve`
+to preview it at http://127.0.0.1:3000/hyperstack-cli/.
+
 ## API Reference
 
 ### Endpoints Used

@@ -15,7 +15,7 @@ description: Make a request to the HyperStack REST API. Automatically attaches t
 ): Promise<unknown>"
 />
 
-<SourceLink href="/source/api-ts/#L41" label="api.ts:41" />
+<SourceLink href="/hyperstack-cli/source/api-ts/#L41" label="api.ts:41" />
 
 **Modifiers:** `async`
 

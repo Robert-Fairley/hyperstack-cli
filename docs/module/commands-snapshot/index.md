@@ -6,13 +6,13 @@ longname: module:commands/snapshot
 
 # commands/snapshot
 
-<SourceLink href="/source/commands/snapshot-ts/#L9" label="snapshot.ts:9" />
+<SourceLink href="/hyperstack-cli/source/commands/snapshot-ts/#L9" label="snapshot.ts:9" />
 
 ---
 
 ## Functions
 
-- [`createSnapshot`](/module/commands-snapshot/createsnapshot)
-- [`deleteSnapshot`](/module/commands-snapshot/deletesnapshot)
-- [`listSnapshots`](/module/commands-snapshot/listsnapshots)
-- [`restoreFromSnapshot`](/module/commands-snapshot/restorefromsnapshot)
+- [`createSnapshot`](/hyperstack-cli/module/commands-snapshot/createsnapshot)
+- [`deleteSnapshot`](/hyperstack-cli/module/commands-snapshot/deletesnapshot)
+- [`listSnapshots`](/hyperstack-cli/module/commands-snapshot/listsnapshots)
+- [`restoreFromSnapshot`](/hyperstack-cli/module/commands-snapshot/restorefromsnapshot)

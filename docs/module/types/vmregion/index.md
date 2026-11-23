@@ -13,7 +13,7 @@ description: Represents a VM region reference from the API.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L13" label="types.ts:13" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L13" label="types.ts:13" />
 
 Represents a VM region reference from the API.
 
@@ -23,4 +23,4 @@ Represents a VM region reference from the API.
 
 <MemberHeading id="name" depth="3" name="name" sig="name: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L14" sourceLabel="types.ts:14" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L14" sourceLabel="types.ts:14" />

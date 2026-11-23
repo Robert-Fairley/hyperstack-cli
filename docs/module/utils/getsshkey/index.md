@@ -9,7 +9,7 @@ description: Retrieve the SSH key path from environment variables.
 
 <Signature code="getSshKey(): string | undefined" />
 
-<SourceLink href="/source/utils-ts/#L15" label="utils.ts:15" />
+<SourceLink href="/hyperstack-cli/source/utils-ts/#L15" label="utils.ts:15" />
 
 Retrieve the SSH key path from environment variables.
 

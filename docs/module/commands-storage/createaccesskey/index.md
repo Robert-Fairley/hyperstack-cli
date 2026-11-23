@@ -9,7 +9,7 @@ description: Create a new S3-compatible access key.
 
 <Signature code="createAccessKey(opts?: { bucketName?: string }): Promise<void>" />
 
-<SourceLink href="/source/commands/storage-ts/#L94" label="storage.ts:94" />
+<SourceLink href="/hyperstack-cli/source/commands/storage-ts/#L94" label="storage.ts:94" />
 
 **Modifiers:** `async`
 

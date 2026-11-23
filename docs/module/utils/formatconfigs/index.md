@@ -13,7 +13,7 @@ description: Format GPU configuration entries into a display string. Filters out
 ): string"
 />
 
-<SourceLink href="/source/utils-ts/#L63" label="utils.ts:63" />
+<SourceLink href="/hyperstack-cli/source/utils-ts/#L63" label="utils.ts:63" />
 
 Format GPU configuration entries into a display string. Filters out zero-count configurations and joins remaining as `size:count`.
 

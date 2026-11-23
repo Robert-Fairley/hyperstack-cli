@@ -9,7 +9,7 @@ description: Detach a volume from its VM.
 
 <Signature code="detachVolume(volumeId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/volume-ts/#L86" label="volume.ts:86" />
+<SourceLink href="/hyperstack-cli/source/commands/volume-ts/#L86" label="volume.ts:86" />
 
 **Modifiers:** `async`
 

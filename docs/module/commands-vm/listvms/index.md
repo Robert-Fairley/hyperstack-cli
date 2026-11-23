@@ -9,7 +9,7 @@ description: List all virtual machines in a table format. Displays id, name, sta
 
 <Signature code="listVms(): Promise<void>" />
 
-<SourceLink href="/source/commands/vm-ts/#L27" label="vm.ts:27" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-ts/#L27" label="vm.ts:27" />
 
 **Modifiers:** `async`
 

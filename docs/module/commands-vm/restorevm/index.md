@@ -9,7 +9,7 @@ description: Restore a hibernated VM. Brings a previously hibernated VM back onl
 
 <Signature code="restoreVm(vmId: string): Promise<void>" />
 
-<SourceLink href="/source/commands/vm-ts/#L66" label="vm.ts:66" />
+<SourceLink href="/hyperstack-cli/source/commands/vm-ts/#L66" label="vm.ts:66" />
 
 **Modifiers:** `async`
 

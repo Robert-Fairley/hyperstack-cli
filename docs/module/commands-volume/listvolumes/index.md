@@ -9,7 +9,7 @@ description: List all block storage volumes in a table format. Displays id, name
 
 <Signature code="listVolumes(): Promise<void>" />
 
-<SourceLink href="/source/commands/volume-ts/#L27" label="volume.ts:27" />
+<SourceLink href="/hyperstack-cli/source/commands/volume-ts/#L27" label="volume.ts:27" />
 
 **Modifiers:** `async`
 

@@ -6,11 +6,11 @@ longname: module:commands/ssh
 
 # commands/ssh
 
-<SourceLink href="/source/commands/ssh-ts/#L8" label="ssh.ts:8" />
+<SourceLink href="/hyperstack-cli/source/commands/ssh-ts/#L8" label="ssh.ts:8" />
 
 ---
 
 ## Functions
 
-- [`sshToVm`](/module/commands-ssh/sshtovm)
-- [`tunnelVm`](/module/commands-ssh/tunnelvm)
+- [`sshToVm`](/hyperstack-cli/module/commands-ssh/sshtovm)
+- [`tunnelVm`](/hyperstack-cli/module/commands-ssh/tunnelvm)

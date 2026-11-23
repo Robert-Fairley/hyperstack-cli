@@ -6,15 +6,15 @@ longname: module:api
 
 # api
 
-<SourceLink href="/source/api-ts/#L12" label="api.ts:12" />
+<SourceLink href="/hyperstack-cli/source/api-ts/#L12" label="api.ts:12" />
 
 ---
 
 ## Functions
 
-- [`apiRequest`](/module/api/apirequest)
-- [`getApiKey`](/module/api/getapikey)
+- [`apiRequest`](/hyperstack-cli/module/api/apirequest)
+- [`getApiKey`](/hyperstack-cli/module/api/getapikey)
 
 ## Variables
 
-- [`BASE_URL`](/module/api/base-url)
+- [`BASE_URL`](/hyperstack-cli/module/api/base-url)

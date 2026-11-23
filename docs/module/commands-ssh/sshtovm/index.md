@@ -9,7 +9,7 @@ description: SSH into a VM by ID or name, forwarding the terminal directly.
 
 <Signature code="sshToVm(vmId: string, user: string): Promise<void>" />
 
-<SourceLink href="/source/commands/ssh-ts/#L18" label="ssh.ts:18" />
+<SourceLink href="/hyperstack-cli/source/commands/ssh-ts/#L18" label="ssh.ts:18" />
 
 **Modifiers:** `async`
 

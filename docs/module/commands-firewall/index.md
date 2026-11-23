@@ -6,12 +6,12 @@ longname: module:commands/firewall
 
 # commands/firewall
 
-<SourceLink href="/source/commands/firewall-ts/#L9" label="firewall.ts:9" />
+<SourceLink href="/hyperstack-cli/source/commands/firewall-ts/#L9" label="firewall.ts:9" />
 
 ---
 
 ## Functions
 
-- [`addFirewallRule`](/module/commands-firewall/addfirewallrule)
-- [`deleteFirewallRule`](/module/commands-firewall/deletefirewallrule)
-- [`listFirewalls`](/module/commands-firewall/listfirewalls)
+- [`addFirewallRule`](/hyperstack-cli/module/commands-firewall/addfirewallrule)
+- [`deleteFirewallRule`](/hyperstack-cli/module/commands-firewall/deletefirewallrule)
+- [`listFirewalls`](/hyperstack-cli/module/commands-firewall/listfirewalls)

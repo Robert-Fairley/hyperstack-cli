@@ -9,7 +9,7 @@ description: Get dashboard summary (active VMs, hourly cost). Displays a single-
 
 <Signature code="getDashboard(): Promise<void>" />
 
-<SourceLink href="/source/commands/billing-ts/#L82" label="billing.ts:82" />
+<SourceLink href="/hyperstack-cli/source/commands/billing-ts/#L82" label="billing.ts:82" />
 
 **Modifiers:** `async`
 

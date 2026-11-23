@@ -13,7 +13,7 @@ description: Create a new block storage volume.
 ): Promise<void>"
 />
 
-<SourceLink href="/source/commands/volume-ts/#L51" label="volume.ts:51" />
+<SourceLink href="/hyperstack-cli/source/commands/volume-ts/#L51" label="volume.ts:51" />
 
 **Modifiers:** `async`
 

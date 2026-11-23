@@ -20,7 +20,7 @@ description: A hardware flavor (VM configuration) as returned by the API.
 }"
 />
 
-<SourceLink href="/source/types-ts/#L107" label="types.ts:107" />
+<SourceLink href="/hyperstack-cli/source/types-ts/#L107" label="types.ts:107" />
 
 A hardware flavor (VM configuration) as returned by the API.
 
@@ -30,32 +30,32 @@ A hardware flavor (VM configuration) as returned by the API.
 
 <MemberHeading id="description" depth="3" name="description" sig="description: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L110" sourceLabel="types.ts:110" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L110" sourceLabel="types.ts:110" />
 
 <MemberHeading id="gpucount" depth="3" name="gpu_count" sig="gpu_count: number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L111" sourceLabel="types.ts:111" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L111" sourceLabel="types.ts:111" />
 
 <MemberHeading id="id" depth="3" name="id" sig="id: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L108" sourceLabel="types.ts:108" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L108" sourceLabel="types.ts:108" />
 
 <MemberHeading id="name" depth="3" name="name" sig="name: string" />
 
-<MemberMeta sourceHref="/source/types-ts/#L109" sourceLabel="types.ts:109" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L109" sourceLabel="types.ts:109" />
 
 <MemberHeading id="ramgb" depth="3" name="ram_gb" sig="ram_gb: number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L113" sourceLabel="types.ts:113" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L113" sourceLabel="types.ts:113" />
 
 <MemberHeading id="regularprice" depth="3" name="regular_price" sig="regular_price: number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L115" sourceLabel="types.ts:115" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L115" sourceLabel="types.ts:115" />
 
 <MemberHeading id="spotprice" depth="3" name="spot_price" sig="spot_price: number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L114" sourceLabel="types.ts:114" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L114" sourceLabel="types.ts:114" />
 
 <MemberHeading id="vcpucount" depth="3" name="vcpu_count" sig="vcpu_count: number" />
 
-<MemberMeta sourceHref="/source/types-ts/#L112" sourceLabel="types.ts:112" />
+<MemberMeta sourceHref="/hyperstack-cli/source/types-ts/#L112" sourceLabel="types.ts:112" />

@@ -9,7 +9,7 @@ description: List usage history with optional date range. Displays date, resourc
 
 <Signature code="listUsage(opts?: { days?: number }): Promise<void>" />
 
-<SourceLink href="/source/commands/billing-ts/#L63" label="billing.ts:63" />
+<SourceLink href="/hyperstack-cli/source/commands/billing-ts/#L63" label="billing.ts:63" />
 
 **Modifiers:** `async`
 
