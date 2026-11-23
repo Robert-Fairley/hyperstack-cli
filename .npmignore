@@ -1,0 +1,13 @@
+node_modules/
+src/
+scripts/
+tsconfig.json
+typedoc.json
+vitest.config.ts
+.git/
+.gitignore
+README.md
+AGENTS.md
+DEVELOPMENT.md
+LICENSE
+docs/

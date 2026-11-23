@@ -7,7 +7,7 @@
     "hstack": "dist/cli.js"
   },
   "files": [
-    "dist/cli.js"
+    "dist"
   ],
   "scripts": {
     "build": "tsc",
