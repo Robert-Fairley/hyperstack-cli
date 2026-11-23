@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This file provides context for AI agents working on the `hs` project (HyperStack CLI).
+This file provides context for AI agents working on the `hstack` project (HyperStack CLI).
 
 # Hard Rules
 
@@ -13,7 +13,7 @@ This file provides context for AI agents working on the `hs` project (HyperStack
 
 ## Project Overview
 
-- **Name**: `hs`
+- **Name**: `hstack`
 - **Type**: TypeScript CLI tool for managing HyperStack GPU cloud instances
 - **Runtime**: Node.js 20+ (ESM)
 - **Build**: TypeScript (`tsc`) → outputs to `dist/`
@@ -68,7 +68,7 @@ src/
 
 ```bash
 npm run build    # Compile TypeScript
-npm run hs       # Run via Node
+npm run hstack       # Run via Node
 ```
 
 ## Installation
@@ -76,12 +76,12 @@ npm run hs       # Run via Node
 ### npm global
 ```bash
 npm install -g .
-hs --help
+hstack --help
 ```
 
 ### From source (development)
 ```bash
-cd /path/to/hs
+cd /path/to/hstack
 npm run build
 node ./dist/cli.js <command>
 ```

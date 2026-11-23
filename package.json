@@ -1,14 +1,14 @@
 {
-  "name": "hs",
+  "name": "hstack",
   "version": "1.0.0",
   "description": "HyperStack CLI - Manage GPU instances, VMs, and tunnels",
   "main": "dist/cli.js",
   "bin": {
-    "hs": "dist/cli.js"
+    "hstack": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
-    "hs": "node ./dist/cli",
+    "hstack": "node ./dist/cli",
     "test": "vitest",
     "test:run": "vitest run"
   },

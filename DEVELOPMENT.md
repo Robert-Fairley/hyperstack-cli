@@ -10,13 +10,13 @@ npm install
 npm run build
 
 # Run
-npm run hs status
+npm run hstack status
 ```
 
 ## Project Structure
 
 ```
-hs/
+hstack/
 ├── src/
 │   ├── cli.ts          # Entry point — command routing & help text
 │   ├── api.ts          # API client (fetch wrapper, auth)
@@ -78,7 +78,7 @@ case "mycommand": {
 Add the command to `printUsage()` in `cli.ts`:
 
 ```typescript
-hs mycommand <arg>    # Do something useful
+hstack mycommand <arg>    # Do something useful
 ```
 
 ## Testing
@@ -93,8 +93,8 @@ For quick manual testing:
 
 ```bash
 export HYPERSTACK_API_KEY="your-key-here"
-npm run hs status
-npm run hs stock -g h100
+npm run hstack status
+npm run hstack stock -g h100
 ```
 
 ## API Reference
@@ -140,7 +140,7 @@ The tunnel command uses `127.0.0.1` instead of `localhost` to avoid IPv6 resolut
 
 ```bash
 # Correct usage:
-hs tunnel my-vm 8000 8000
+hstack tunnel my-vm 8000 8000
 # Equivalent to:
 ssh -i ~/.ssh/llm -N -L 127.0.0.1:8000:127.0.0.1:8000 ubuntu@<vm-ip>
 ```
@@ -152,12 +152,12 @@ ssh -i ~/.ssh/llm -N -L 127.0.0.1:8000:127.0.0.1:8000 ubuntu@<vm-ip>
 Users can install globally:
 
 ```bash
-npm install -g /path/to/hs
+npm install -g /path/to/hstack
 # or from a published package
-npm install -g @lleulabs/hs
+npm install -g @lleulabs/hstack
 ```
 
-This makes `hs` available system-wide.
+This makes `hstack` available system-wide.
 
 ### Binary release (future)
 
@@ -200,6 +200,6 @@ curl localhost:<remote-port>
 
 1. Make changes in `src/`
 2. Run `npm run build` to compile
-3. Test with `npm run hs <command>`
+3. Test with `npm run hstack <command>`
 4. Update `README.md` if adding/changing commands
 5. Commit with descriptive messages

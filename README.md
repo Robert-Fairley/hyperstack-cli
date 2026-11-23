@@ -1,4 +1,4 @@
-# hs — HyperStack CLI
+# hstack — HyperStack CLI
 
 CLI tool for managing HyperStack GPU cloud instances. Hibernate and restore VMs, query GPU stock, SSH into instances, and create port tunnels.
 
@@ -8,6 +8,7 @@ CLI tool for managing HyperStack GPU cloud instances. Hibernate and restore VMs,
 
 ```bash
 npm install -g .
+# Runs as: hstack
 ```
 
 ### From source
@@ -31,28 +32,28 @@ export HYPERSTACK_API_KEY="your-key-here"
 export HYPERSTACK_SSH_KEY=~/.ssh/llm
 
 # List all VMs
-hs status
+hstack status
 
 # Hibernate a VM (stop billing, preserve state)
-hs hibernate i-abc123
+hstack hibernate i-abc123
 
 # Hibernate but keep the public IP
-hs hibernate i-abc123 --retain-ip
+hstack hibernate i-abc123 --retain-ip
 
 # Restore a hibernated VM
-hs restore i-abc123
+hstack restore i-abc123
 
 # Query GPU availability
-hs stock -g h100          # Filter by GPU model
-hs stock -r us-east       # Filter by region
-hs stock -a               # Available only
+hstack stock -g h100          # Filter by GPU model
+hstack stock -r us-east       # Filter by region
+hstack stock -a               # Available only
 
 # SSH into a VM
-hs ssh my-vm              # Default user: ubuntu
-hs ssh my-vm root         # Custom user
+hstack ssh my-vm              # Default user: ubuntu
+hstack ssh my-vm root         # Custom user
 
 # Create an SSH tunnel
-hs tunnel my-vm 8000 8000  # localhost:8000 → VM:8000
+hstack tunnel my-vm 8000 8000  # localhost:8000 → VM:8000
 ```
 
 ## Environment Variables
