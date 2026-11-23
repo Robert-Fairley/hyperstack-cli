@@ -78,5 +78,5 @@ Use at your own risk. Always verify API responses and command effects before exe
 
 [MIT License](LICENSE) • Free Software
 
-© 2026 Lleu Labs Inc. / Robert Fairley
+© 2026 Robert Fairley
 
