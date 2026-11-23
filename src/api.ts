@@ -18,15 +18,27 @@ export function getApiKey(): string {
  * Make a request to the HyperStack API.
  * Returns parsed JSON response or throws on error.
  */
-export async function apiRequest(path: string): Promise<unknown> {
+export async function apiRequest(
+  path: string,
+  method = "GET",
+  body?: Record<string, unknown>
+): Promise<unknown> {
   const apiKey = getApiKey();
 
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const opts: RequestInit = {
+    method,
     headers: {
       Accept: "application/json",
+      "Content-Type": "application/json",
       api_key: apiKey,
     },
-  });
+  };
+
+  if (body && method !== "GET") {
+    opts.body = JSON.stringify(body);
+  }
+
+  const res = await fetch(`${BASE_URL}${path}`, opts);
 
   const rawText = await res.text();
   let data: unknown;
