@@ -1,0 +1,26 @@
+{
+  "name": "hs",
+  "version": "1.0.0",
+  "description": "HyperStack CLI - Manage GPU instances, VMs, and tunnels",
+  "main": "dist/cli.js",
+  "bin": {
+    "hs": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "hs": "node ./dist/cli",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Robert Fairley",
+    "email": "rob@lleulabs.com"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
+  }
+}
