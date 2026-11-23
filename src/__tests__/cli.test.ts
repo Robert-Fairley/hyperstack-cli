@@ -314,7 +314,9 @@ describe("CLI command routing", () => {
   it("routes 'firewalls' command", async () => {
     process.argv = ["node", "hs", "firewalls"];
     
-    const mockData = [];
+    const mockData = [
+      { name: "default", id: "fw-1", vm_id: "i-abc", rules: [{ id: "r1", port: "443", protocol: "tcp", source: "0.0.0.0/0" }] },
+    ];
     vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       text: () => Promise.resolve(JSON.stringify(mockData)),

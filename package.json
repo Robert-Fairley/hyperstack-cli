@@ -6,21 +6,39 @@
   "bin": {
     "hstack": "dist/cli.js"
   },
+  "files": [
+    "dist/cli.js"
+  ],
   "scripts": {
     "build": "tsc",
     "hstack": "node ./dist/cli",
     "test": "vitest",
     "test:run": "vitest run"
   },
-  "keywords": [],
+  "keywords": [
+    "hyperstack",
+    "gpu",
+    "cli",
+    "cloud",
+    "vm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lleulabs/hstack"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "author": {
     "name": "Robert Fairley",
     "email": "rob@lleulabs.com"
   },
   "type": "module",
   "devDependencies": {
+    "@clean-jsdoc-theme/typedoc": "^5.3.0",
     "@types/node": "^26.6.6",
-    "typescript": "^7.0.2",
+    "typedoc": "^0.28.20",
+    "typescript": "^6.0.0",
     "vitest": "^5.1.1"
   }
 }
