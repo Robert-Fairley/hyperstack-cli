@@ -11,6 +11,8 @@
   ],
   "scripts": {
     "build": "tsc",
+    "docs": "typedoc",
+    "docs:serve": "python3 -m http.server 3000 --directory docs/api",
     "hstack": "node ./dist/cli",
     "test": "vitest",
     "test:run": "vitest run"

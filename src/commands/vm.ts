@@ -1,6 +1,10 @@
 /**
  * Virtual machine management commands.
  * List, hibernate, restore, and IP lookup operations.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/ — Virtual Machine API reference
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/hibernation/ — Hibernation guide
+ * @see https://docs.hyperstack.cloud/docs/network/public-ip/ — Public IP addresses
  */
 
 import { apiRequest } from "../api.js";
@@ -17,6 +21,8 @@ interface VmInfo {
 
 /**
  * List all virtual machines in a table format.
+ * Displays id, name, status, region, and public IP for each VM.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#get-virtual-machines — GET /core/virtual-machines
  */
 export async function listVms(): Promise<void> {
   const data = await apiRequest("/core/virtual-machines");
@@ -35,6 +41,11 @@ export async function listVms(): Promise<void> {
 
 /**
  * Hibernate a VM (shut down with state preserved).
+ * Stops billing while preserving disk and memory state for fast restore.
+ * @param vmId — The VM ID or name to hibernate.
+ * @param retainIp — If true, keep the public IP attached after hibernation. Defaults to `false`.
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/hibernation/ — Hibernation guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#hibernate-vm — Hibernate VM endpoint
  */
 export async function hibernateVm(vmId: string, retainIp = false): Promise<void> {
   const url = retainIp
@@ -47,6 +58,10 @@ export async function hibernateVm(vmId: string, retainIp = false): Promise<void>
 
 /**
  * Restore a hibernated VM.
+ * Brings a previously hibernated VM back online.
+ * @param vmId — The VM ID or name to restore.
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/hibernation/ — Hibernation guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#restore-hibernated-vm — Restore hibernated VM endpoint
  */
 export async function restoreVm(vmId: string): Promise<void> {
   const result = await apiRequest(`/core/virtual-machines/${vmId}/hibernate-restore`);
@@ -55,6 +70,12 @@ export async function restoreVm(vmId: string): Promise<void> {
 
 /**
  * Get the public IP address for a VM by ID or name.
+ * Tries numeric ID lookup first, then falls back to name-based search across all VMs.
+ * @param vmIdOrName — The VM ID (numeric) or name to look up.
+ * @returns The public IP address string.
+ * @throws Error if no VM is found or no IP is available.
+ * @see https://docs.hyperstack.cloud/docs/network/public-ip/ — Public IP addresses
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#get-virtual-machine — Get VM endpoint
  */
 export async function getVmIp(vmIdOrName: string): Promise<string> {
   // Try numeric ID first

@@ -1,6 +1,9 @@
 /**
  * Kubernetes cluster commands.
  * List, create, and manage K8s clusters via the API.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/ — Clusters API reference
+ * @see https://docs.hyperstack.cloud/docs/kubernetes/kubernetes-guide/ — Kubernetes guide
  */
 
 import { apiRequest } from "../api.js";
@@ -16,7 +19,9 @@ interface ClusterRow {
 }
 
 /**
- * List Kubernetes clusters.
+ * List Kubernetes clusters in a table format.
+ * Displays id, name, status, region, K8s version, and node count for each cluster.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/#get-clusters — GET /core/clusters
  */
 export async function listClusters(): Promise<void> {
   const data = await apiRequest("/core/clusters");
@@ -36,6 +41,13 @@ export async function listClusters(): Promise<void> {
 
 /**
  * Create a new Kubernetes cluster.
+ * @param opts — Optional cluster configuration.
+ * @param opts.name — Cluster display name.
+ * @param opts.region — Target region.
+ * @param opts.nodeCount — Number of worker nodes.
+ * @param opts.k8sVersion — Kubernetes version (e.g., `"1.31"`).
+ * @see https://docs.hyperstack.cloud/docs/kubernetes/kubernetes-guide/ — Kubernetes guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/#create-cluster — POST /core/clusters
  */
 export async function createCluster(opts?: {
   name?: string;
@@ -56,6 +68,8 @@ export async function createCluster(opts?: {
 
 /**
  * Delete a Kubernetes cluster.
+ * @param clusterId — The cluster ID to delete.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/#delete-cluster — DELETE /core/clusters/{id}
  */
 export async function deleteCluster(clusterId: string): Promise<void> {
   const result = await apiRequest(`/core/clusters/${clusterId}`, "DELETE");

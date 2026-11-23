@@ -1,6 +1,9 @@
 /**
  * GPU stock query command.
  * Query available GPU instances across regions.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/stock/ — Stock API reference
+ * @see https://docs.hyperstack.cloud/docs/hardware/gpu-stock-information/ — GPU stock information guide
  */
 
 import { apiRequest } from "../api.js";
@@ -15,7 +18,13 @@ interface StockRow {
 }
 
 /**
- * Query GPU stock with optional filtering.
+ * Query GPU stock with optional filtering by region, GPU model, and availability.
+ * Returns a table of available GPU configurations across all regions.
+ * @param opts — Filter options.
+ * @param opts.region — Filter by region name (case-insensitive partial match).
+ * @param opts.gpu — Filter by GPU model name (case-insensitive partial match).
+ * @param opts.availableOnly — If true, only show GPUs with available instances.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/stock/#get-gpu-stock — GET /core/stocks
  */
 export async function queryStock(opts: {
   region?: string;

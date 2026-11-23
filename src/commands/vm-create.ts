@@ -1,6 +1,11 @@
 /**
  * VM creation command.
  * Deploy new GPU/CPU virtual machines via the API.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/flavor/ — Flavors API reference
+ * @see https://docs.hyperstack.cloud/docs/api-reference/image/ — Image API reference
+ * @see https://docs.hyperstack.cloud/docs/api-reference/region/ — Region API reference
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/ — Virtual Machine API reference
  */
 
 import { apiRequest } from "../api.js";
@@ -25,6 +30,8 @@ interface ImageInfo {
 
 /**
  * List available flavors (hardware configurations).
+ * Displays id, name, GPU count, vCPU, RAM, and pricing for each flavor.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/flavor/#get-flavors — GET /core/flavors
  */
 export async function listFlavors(): Promise<void> {
   const data = await apiRequest("/core/flavors");
@@ -44,7 +51,9 @@ export async function listFlavors(): Promise<void> {
 }
 
 /**
- * List available OS images.
+ * List available OS images for VM provisioning.
+ * Displays id, name, OS type, and public availability for each image.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/image/#get-images — GET /core/images
  */
 export async function listImages(): Promise<void> {
   const data = await apiRequest("/core/images");
@@ -61,7 +70,9 @@ export async function listImages(): Promise<void> {
 }
 
 /**
- * List available regions.
+ * List available regions for VM deployment.
+ * Displays id, name, and status for each region.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/region/#get-regions — GET /core/regions
  */
 export async function listRegions(): Promise<void> {
   const data = await apiRequest("/core/regions");
@@ -78,6 +89,16 @@ export async function listRegions(): Promise<void> {
 
 /**
  * Create a new virtual machine.
+ * @param opts — VM creation options.
+ * @param opts.flavorId — Hardware flavor ID (required).
+ * @param opts.imageId — OS image ID (required).
+ * @param opts.name — Display name for the VM.
+ * @param opts.region — Target region.
+ * @param opts.keyName — SSH key pair name.
+ * @param opts.spot — Use spot/preemptible pricing.
+ * @param opts.count — Number of VMs to create (default: 1).
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/getting-started/ — Getting started with VMs
+ * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#create-vm — POST /core/virtual-machines
  */
 export async function createVm(opts: {
   flavorId?: string;

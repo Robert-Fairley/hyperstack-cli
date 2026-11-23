@@ -1,6 +1,14 @@
 /**
  * Billing commands.
  * Check credit balance, usage history, and account status.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/section-billing/ — Billing API section
+ * @see https://docs.hyperstack.cloud/docs/api-reference/credit/ — Credit balance endpoint
+ * @see https://docs.hyperstack.cloud/docs/api-reference/billing/ — Usage history endpoint
+ * @see https://docs.hyperstack.cloud/docs/api-reference/billing-ai-studio/ — AI Studio billing
+ * @see https://docs.hyperstack.cloud/docs/api-reference/payment/ — Payment management
+ * @see https://docs.hyperstack.cloud/docs/api-reference/vouchers/ — Voucher redemption
+ * @see https://docs.hyperstack.cloud/docs/api-reference/billing/#get-billing-details — Billing details endpoint
  */
 
 import { apiRequest } from "../api.js";
@@ -20,6 +28,8 @@ interface UsageRow {
 
 /**
  * Check account credit balance.
+ * Displays current balance and currency in a table format.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/credit/#get-credit-balance — GET /billing/credit
  */
 export async function checkCredit(): Promise<void> {
   const data = await apiRequest("/billing/credit");
@@ -35,6 +45,8 @@ export async function checkCredit(): Promise<void> {
 
 /**
  * Get account billing status (alive check).
+ * Returns raw API response confirming the account is active.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/alive/ — Billing alive endpoint
  */
 export async function billingStatus(): Promise<void> {
   const data = await apiRequest("/billing/alive");
@@ -43,6 +55,10 @@ export async function billingStatus(): Promise<void> {
 
 /**
  * List usage history with optional date range.
+ * Displays date, resource type/ID, amount, and description for each billing record.
+ * @param opts — Optional filters.
+ * @param opts.days — Number of days to look back (not enforced by API).
+ * @see https://docs.hyperstack.cloud/docs/api-reference/billing/#get-billing-records — GET /billing/billing
  */
 export async function listUsage(opts?: { days?: number }): Promise<void> {
   const data = await apiRequest("/billing/billing");
@@ -60,6 +76,8 @@ export async function listUsage(opts?: { days?: number }): Promise<void> {
 
 /**
  * Get dashboard summary (active VMs, hourly cost).
+ * Displays a single-row table with account overview metrics.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/dashboard/ — Dashboard endpoint
  */
 export async function getDashboard(): Promise<void> {
   const data = await apiRequest("/dashboard");

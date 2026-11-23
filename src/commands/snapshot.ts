@@ -1,6 +1,9 @@
 /**
  * Snapshot management commands.
  * Create, list, restore, and delete VM disk snapshots.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/ — Snapshots API reference
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/snapshots/ — Snapshots guide
  */
 
 import { apiRequest } from "../api.js";
@@ -15,7 +18,9 @@ interface SnapshotRow {
 }
 
 /**
- * List all snapshots in a table format.
+ * List all disk snapshots in a table format.
+ * Displays id, name, size, status, and source VM for each snapshot.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#get-snapshots — GET /core/snapshots
  */
 export async function listSnapshots(): Promise<void> {
   const data = await apiRequest("/core/snapshots");
@@ -33,7 +38,11 @@ export async function listSnapshots(): Promise<void> {
 }
 
 /**
- * Create a snapshot from a VM.
+ * Create a snapshot from a VM's disk.
+ * @param vmId — The source VM ID or name.
+ * @param name — Optional display name for the snapshot.
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/snapshots/ — Snapshots guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#create-snapshot — Create snapshot endpoint
  */
 export async function createSnapshot(vmId: string, name?: string): Promise<void> {
   const body: Record<string, unknown> = {};
@@ -45,6 +54,9 @@ export async function createSnapshot(vmId: string, name?: string): Promise<void>
 
 /**
  * Restore a VM from a snapshot.
+ * @param snapshotId — The snapshot ID to restore from.
+ * @see https://docs.hyperstack.cloud/docs/virtual-machines/snapshots/ — Snapshots guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#restore-snapshot — Restore snapshot endpoint
  */
 export async function restoreFromSnapshot(snapshotId: string): Promise<void> {
   const result = await apiRequest(`/core/snapshots/${snapshotId}/restore`, "POST");
@@ -53,6 +65,8 @@ export async function restoreFromSnapshot(snapshotId: string): Promise<void> {
 
 /**
  * Delete a snapshot.
+ * @param snapshotId — The snapshot ID to delete.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#delete-snapshot — DELETE /core/snapshots/{id}
  */
 export async function deleteSnapshot(snapshotId: string): Promise<void> {
   const result = await apiRequest(`/core/snapshots/${snapshotId}`, "DELETE");

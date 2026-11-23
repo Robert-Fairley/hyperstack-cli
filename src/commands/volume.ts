@@ -1,6 +1,11 @@
 /**
  * Volume management commands.
  * List, create, attach, detach, and delete block storage volumes.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/volume/ — Volume API reference
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/creating-a-volume/ — Creating a volume guide
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/mounting-volume/ — Mounting volumes
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/detaching-a-volume/ — Detaching volumes
  */
 
 import { apiRequest } from "../api.js";
@@ -15,7 +20,9 @@ interface VolumeRow {
 }
 
 /**
- * List all volumes in a table format.
+ * List all block storage volumes in a table format.
+ * Displays id, name, size, status, and attached VM for each volume.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/volume/#get-volumes — GET /core/volumes
  */
 export async function listVolumes(): Promise<void> {
   const data = await apiRequest("/core/volumes");
@@ -34,6 +41,12 @@ export async function listVolumes(): Promise<void> {
 
 /**
  * Create a new block storage volume.
+ * @param opts — Volume creation options.
+ * @param opts.sizeGb — Size of the volume in gigabytes (required).
+ * @param opts.name — Optional display name for the volume.
+ * @param opts.region — Optional region override.
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/creating-a-volume/ — Creating a volume guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/volume/#create-volume — POST /core/volumes
  */
 export async function createVolume(opts: {
   sizeGb: number;
@@ -53,6 +66,10 @@ export async function createVolume(opts: {
 
 /**
  * Attach a volume to a VM.
+ * @param volumeId — The volume ID to attach.
+ * @param vmId — The target VM ID or name.
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/mounting-volume/ — Mounting volumes
+ * @see https://docs.hyperstack.cloud/docs/api-reference/volume-attachment/#attach-volume — Attach volume endpoint
  */
 export async function attachVolume(volumeId: string, vmId: string): Promise<void> {
   const result = await apiRequest(`/core/volumes/${volumeId}/attach`, "POST", {
@@ -63,6 +80,8 @@ export async function attachVolume(volumeId: string, vmId: string): Promise<void
 
 /**
  * Detach a volume from its VM.
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/detaching-a-volume/ — Detaching volumes
+ * @see https://docs.hyperstack.cloud/docs/api-reference/volume-attachment/#detach-volume — Detach volume endpoint
  */
 export async function detachVolume(volumeId: string): Promise<void> {
   const result = await apiRequest(`/core/volumes/${volumeId}/detach`, "POST");
@@ -71,6 +90,9 @@ export async function detachVolume(volumeId: string): Promise<void> {
 
 /**
  * Delete a volume.
+ * @param volumeId — The volume ID to delete.
+ * @see https://docs.hyperstack.cloud/docs/storage/volumes/creating-a-volume/ — Volume lifecycle
+ * @see https://docs.hyperstack.cloud/docs/api-reference/volume/#delete-volume — DELETE /core/volumes/{id}
  */
 export async function deleteVolume(volumeId: string): Promise<void> {
   const result = await apiRequest(`/core/volumes/${volumeId}`, "DELETE");

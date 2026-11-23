@@ -1,0 +1,30 @@
+{
+  "entryPoints": [
+    "src/api.ts",
+    "src/utils.ts",
+    "src/types.ts",
+    "src/commands/vm.ts",
+    "src/commands/stock.ts",
+    "src/commands/ssh.ts",
+    "src/commands/volume.ts",
+    "src/commands/snapshot.ts",
+    "src/commands/billing.ts",
+    "src/commands/firewall.ts",
+    "src/commands/storage.ts",
+    "src/commands/k8s.ts",
+    "src/commands/vm-create.ts"
+  ],
+  "outputs": [
+    {
+      "name": "clean-jsdoc-theme",
+      "path": "docs/api"
+    }
+  ],
+  "plugin": ["@clean-jsdoc-theme/typedoc"],
+  "exclude": ["src/__tests__/**/*"],
+  "includeVersion": true,
+  "hideGenerator": false,
+  "cleanJsdocTheme": {
+    "siteName": "hstack"
+  }
+}

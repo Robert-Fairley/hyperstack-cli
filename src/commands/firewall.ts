@@ -1,6 +1,9 @@
 /**
  * Firewall management commands.
  * Create, list, and manage firewall rules on VMs.
+ *
+ * @see https://docs.hyperstack.cloud/docs/api-reference/firewalls/ — Firewalls API reference
+ * @see https://docs.hyperstack.cloud/docs/network/firewalls/ — Firewalls guide
  */
 
 import { apiRequest } from "../api.js";
@@ -15,7 +18,10 @@ interface RuleRow {
 }
 
 /**
- * List firewalls for a VM.
+ * List firewalls for a VM or all firewalls globally.
+ * Displays rules in table format per firewall.
+ * @param vmId — Optional VM ID to list firewalls for a specific VM. Omit for global list.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/firewalls/#get-firewalls — GET /core/firewalls
  */
 export async function listFirewalls(vmId?: string): Promise<void> {
   const path = vmId ? `/core/virtual-machines/${vmId}/firewalls` : "/core/firewalls";
@@ -42,6 +48,14 @@ export async function listFirewalls(vmId?: string): Promise<void> {
 
 /**
  * Add a firewall rule to a VM.
+ * @param vmId — The target VM ID.
+ * @param opts — Rule configuration options.
+ * @param opts.port — Port number to open (e.g., `443`).
+ * @param opts.protocol — Protocol: `"tcp"` or `"udp"`. Defaults to `"tcp"`.
+ * @param opts.source — CIDR source range. Defaults to `"0.0.0.0/0"`.
+ * @param opts.description — Optional human-readable description.
+ * @see https://docs.hyperstack.cloud/docs/network/firewalls/ — Firewalls guide
+ * @see https://docs.hyperstack.cloud/docs/api-reference/firewalls/#create-firewall-rule — Create firewall rule endpoint
  */
 export async function addFirewallRule(
   vmId: string,
@@ -59,7 +73,10 @@ export async function addFirewallRule(
 }
 
 /**
- * Delete a firewall rule.
+ * Delete a firewall rule from a VM.
+ * @param vmId — The target VM ID.
+ * @param ruleId — The firewall rule ID to delete.
+ * @see https://docs.hyperstack.cloud/docs/api-reference/firewalls/#delete-firewall-rule — DELETE /core/firewalls/{id}
  */
 export async function deleteFirewallRule(vmId: string, ruleId: string): Promise<void> {
   const result = await apiRequest(`/core/virtual-machines/${vmId}/firewalls/${ruleId}`, "DELETE");
