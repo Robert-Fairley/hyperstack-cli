@@ -24,7 +24,10 @@ Usage:
   hs status                          List virtual machines
   hs list                            Alias for 'status'
   hs hibernate <id> [--retain-ip]    Hibernate a VM (save state, stop billing)
-  hs restore <id>                    Restore a hibernated VM
+  hs restore <id> [--public-ip]          Restore a hibernated VM
+
+  ── Global Options ──────────────────────────────
+  --json, -j                         Output results in JSON format
 
   ── VM Provisioning ─────────────────────────────
   hs flavors                         List available GPU/CPU flavors
@@ -93,58 +96,98 @@ For development notes, see DEVELOPMENT.md`);
 }
 
 async function main(): Promise<void> {
-  const argv = process.argv.slice(2);
-  const cmd = argv[0];
+  const { values, positionals } = parseArgs({
+    args: process.argv.slice(2),
+    allowPositionals: true,
+    strict: false,
+    options: {
+      json: { type: "boolean", default: false, short: "j" },
+    },
+  });
+
+  const isJsonOutput = values.json as boolean;
+  const cmd = positionals[0];
 
   if (!cmd) {
     printUsage();
     return;
   }
 
+  // Wrap command execution so errors respect isJsonOutput
+  async function runCommand(fn: () => Promise<void>): Promise<void> {
+    try {
+      await fn();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (isJsonOutput) {
+        console.log(JSON.stringify({ error: message }, null, 2));
+      } else {
+        console.error(message);
+      }
+      process.exit(1);
+    }
+  }
+
   switch (cmd) {
     // ── VM Management ───────────────────────────────
     case "status":
     case "list":
-      await listVms();
+      await runCommand(() => listVms(isJsonOutput));
       break;
 
     case "hibernate": {
-      const vmId = argv[1];
+      const vmId = positionals[1];
       if (!vmId) {
         console.error("Error: VM ID is required");
         console.error("Usage: hs hibernate <id> [--retain-ip]");
         process.exit(1);
       }
-      await hibernateVm(vmId, argv.includes("--retain-ip"));
+      const { values: hibernateValues } = parseArgs({
+        args: process.argv.slice(3),
+        allowPositionals: true,
+        strict: false,
+        options: {
+          "retain-ip": { type: "boolean", default: false },
+        },
+      });
+      await runCommand(() => hibernateVm(vmId, hibernateValues["retain-ip"] as boolean, isJsonOutput));
       break;
     }
 
     case "restore": {
-      const vmId = argv[1];
+      const vmId = positionals[1];
       if (!vmId) {
         console.error("Error: VM ID is required");
-        console.error("Usage: hs restore <id>");
+        console.error("Usage: hs restore <id> [--public-ip]");
         process.exit(1);
       }
-      await restoreVm(vmId);
+      const { values: restoreValues } = parseArgs({
+        args: process.argv.slice(3),
+        allowPositionals: true,
+        strict: false,
+        options: {
+          "public-ip": { type: "boolean", default: false },
+        },
+      });
+      await runCommand(() => restoreVm(vmId, restoreValues["public-ip"] as boolean, isJsonOutput));
       break;
     }
 
     // ── VM Provisioning ─────────────────────────────
     case "flavors":
-      await listFlavors();
+      await runCommand(() => listFlavors(isJsonOutput));
       break;
 
     case "images":
-      await listImages();
+      await runCommand(() => listImages(isJsonOutput));
       break;
 
     case "regions":
-      await listRegions();
+      await runCommand(() => listRegions(isJsonOutput));
       break;
 
     case "vm": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'vm' requires a subcommand");
         console.error("Usage: hs vm create --flavor <id> [--image <id>] [--name <n>] [--region <r>] [--spot]");
@@ -153,7 +196,7 @@ async function main(): Promise<void> {
       switch (sub) {
         case "create": {
           const { values } = parseArgs({
-            args: argv.slice(2),
+            args: process.argv.slice(3),
             allowPositionals: true,
             strict: false,
             options: {
@@ -175,7 +218,7 @@ async function main(): Promise<void> {
           const spot = values.spot === true;
           const count = parseInt(String(values.count), 10) || 1;
 
-          await createVm({ flavorId, imageId, name, region, keyName, spot, count });
+          await runCommand(() => createVm({ flavorId, imageId, name, region, keyName, spot, count }, isJsonOutput));
           break;
         }
         default:
@@ -187,11 +230,11 @@ async function main(): Promise<void> {
 
     // ── Storage ─────────────────────────────────────
     case "volumes":
-      await listVolumes();
+      await runCommand(() => listVolumes(isJsonOutput));
       break;
 
     case "volume": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'volume' requires a subcommand");
         process.exit(1);
@@ -199,7 +242,7 @@ async function main(): Promise<void> {
       switch (sub) {
         case "create": {
           const { values } = parseArgs({
-            args: argv.slice(2),
+            args: process.argv.slice(3),
             allowPositionals: true,
             strict: false,
             options: {
@@ -214,28 +257,33 @@ async function main(): Promise<void> {
             console.error("Error: --size is required");
             process.exit(1);
           }
-          await createVolume({
-            sizeGb: parseInt(sizeStr, 10),
-            name: typeof values.name === "string" ? values.name : undefined,
-            region: typeof values.region === "string" ? values.region : undefined,
-          });
+          await runCommand(() =>
+            createVolume(
+              {
+                sizeGb: parseInt(sizeStr, 10),
+                name: typeof values.name === "string" ? values.name : undefined,
+                region: typeof values.region === "string" ? values.region : undefined,
+              },
+              isJsonOutput,
+            )
+          );
           break;
         }
         case "attach": {
-          const volId = argv[2];
-          const vmId = argv[3];
+          const volId = positionals[2];
+          const vmId = positionals[3];
           if (!volId || !vmId) {
             console.error("Error: volume ID and VM ID are required");
             process.exit(1);
           }
-          await attachVolume(volId, vmId);
+          await runCommand(() => attachVolume(volId, vmId, isJsonOutput));
           break;
         }
         case "detach":
-          await detachVolume(argv[2] ?? "");
+          await runCommand(() => detachVolume(positionals[2] ?? "", isJsonOutput));
           break;
         case "delete":
-          await deleteVolume(argv[2] ?? "");
+          await runCommand(() => deleteVolume(positionals[2] ?? "", isJsonOutput));
           break;
         default:
           console.error(`Unknown 'volume' subcommand: ${sub}`);
@@ -246,37 +294,37 @@ async function main(): Promise<void> {
 
     // ── Snapshots ───────────────────────────────────
     case "snapshots":
-      await listSnapshots();
+      await runCommand(() => listSnapshots(isJsonOutput));
       break;
 
     case "snapshot": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'snapshot' requires a subcommand");
         process.exit(1);
       }
       switch (sub) {
         case "create": {
-          const vmId = argv[2];
+          const vmId = positionals[2];
           if (!vmId) {
             console.error("Error: VM ID is required");
             process.exit(1);
           }
           const { values } = parseArgs({
-            args: argv.slice(3),
+            args: process.argv.slice(4),
             allowPositionals: true,
             strict: false,
             options: { name: { type: "string" } },
           });
           const name = typeof values.name === "string" ? values.name : undefined;
-          await createSnapshot(vmId, name);
+          await runCommand(() => createSnapshot(vmId, name, isJsonOutput));
           break;
         }
         case "restore":
-          await restoreFromSnapshot(argv[2] ?? "");
+          await runCommand(() => restoreFromSnapshot(positionals[2] ?? "", isJsonOutput));
           break;
         case "delete":
-          await deleteSnapshot(argv[2] ?? "");
+          await runCommand(() => deleteSnapshot(positionals[2] ?? "", isJsonOutput));
           break;
         default:
           console.error(`Unknown 'snapshot' subcommand: ${sub}`);
@@ -288,7 +336,7 @@ async function main(): Promise<void> {
     // ── GPU Stock ───────────────────────────────────
     case "stock": {
       const { values } = parseArgs({
-        args: argv.slice(1),
+        args: process.argv.slice(2),
         allowPositionals: true,
         strict: false,
         options: {
@@ -315,34 +363,34 @@ async function main(): Promise<void> {
       if (gpuVal !== undefined) opts.gpu = gpuVal;
       if (values.available === true) opts.availableOnly = true;
 
-      await queryStock(opts as { region?: string; gpu?: string; availableOnly?: boolean });
+      await runCommand(() => queryStock(opts as { region?: string; gpu?: string; availableOnly?: boolean }, isJsonOutput));
       break;
     }
 
     // ── Billing ─────────────────────────────────────
     case "billing": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'billing' requires a subcommand");
         process.exit(1);
       }
       switch (sub) {
         case "credits":
-          await checkCredit();
+          await runCommand(() => checkCredit(isJsonOutput));
           break;
         case "usage": {
           const { values } = parseArgs({
-            args: argv.slice(2),
+            args: process.argv.slice(3),
             allowPositionals: true,
             strict: false,
             options: { days: { type: "string" } },
           });
           const days = typeof values.days === "string" ? parseInt(values.days, 10) : undefined;
-          await listUsage({ days });
+          await runCommand(() => listUsage({ days }, isJsonOutput));
           break;
         }
         case "status":
-          await billingStatus();
+          await runCommand(() => billingStatus(isJsonOutput));
           break;
         default:
           console.error(`Unknown 'billing' subcommand: ${sub}`);
@@ -353,64 +401,67 @@ async function main(): Promise<void> {
 
     // ── Dashboard ───────────────────────────────────
     case "dashboard":
-      await getDashboard();
+      await runCommand(() => getDashboard(isJsonOutput));
       break;
 
     // ── Networking ──────────────────────────────────
     case "ssh": {
-      const vmId = argv[1];
+      const vmId = positionals[1];
       if (!vmId) {
         console.error("Error: VM ID or name is required");
         console.error("Usage: hs ssh <id|name> [user]");
         process.exit(1);
       }
-      await sshToVm(vmId, argv[2] || "ubuntu");
+      await runCommand(() => sshToVm(vmId, positionals[2] || "ubuntu", isJsonOutput));
       break;
     }
 
     case "tunnel": {
-      const vmId = argv[1];
+      const vmId = positionals[1];
       if (!vmId) {
         console.error("Error: VM ID or name is required");
         console.error("Usage: hs tunnel <id|name> [local] [remote] [user]");
         process.exit(1);
       }
-      await tunnelVm(
-        vmId,
-        argv[2] || "8000",
-        argv[3] || "8000",
-        argv[4] || "ubuntu"
+      await runCommand(() =>
+        tunnelVm(
+          vmId,
+          positionals[2] || "8000",
+          positionals[3] || "8000",
+          positionals[4] || "ubuntu",
+          isJsonOutput,
+        )
       );
       break;
     }
 
     case "firewalls": {
       const { values } = parseArgs({
-        args: argv.slice(1),
+        args: process.argv.slice(2),
         allowPositionals: true,
         strict: false,
         options: { vm: { type: "string" } },
       });
       const vmId = typeof values.vm === "string" ? values.vm : undefined;
-      await listFirewalls(vmId);
+      await runCommand(() => listFirewalls(vmId, isJsonOutput));
       break;
     }
 
     case "firewall": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'firewall' requires a subcommand");
         process.exit(1);
       }
       switch (sub) {
         case "add": {
-          const vmId = argv[2];
+          const vmId = positionals[2];
           if (!vmId) {
             console.error("Error: VM ID is required");
             process.exit(1);
           }
           const { values } = parseArgs({
-            args: argv.slice(3),
+            args: process.argv.slice(4),
             allowPositionals: true,
             strict: false,
             options: {
@@ -424,17 +475,17 @@ async function main(): Promise<void> {
           const protocol = typeof values.protocol === "string" ? values.protocol : undefined;
           const source = typeof values.source === "string" ? values.source : undefined;
           const description = typeof values.description === "string" ? values.description : undefined;
-          await addFirewallRule(vmId, { port, protocol, source, description });
+          await runCommand(() => addFirewallRule(vmId, { port, protocol, source, description }, isJsonOutput));
           break;
         }
         case "delete": {
-          const vmId = argv[2];
-          const ruleId = argv[3];
+          const vmId = positionals[2];
+          const ruleId = positionals[3];
           if (!vmId || !ruleId) {
             console.error("Error: VM ID and rule ID are required");
             process.exit(1);
           }
-          await deleteFirewallRule(vmId, ruleId);
+          await runCommand(() => deleteFirewallRule(vmId, ruleId, isJsonOutput));
           break;
         }
         default:
@@ -446,21 +497,23 @@ async function main(): Promise<void> {
 
     // ── Object Storage ──────────────────────────────
     case "buckets":
-      await listBuckets();
+      await runCommand(() => listBuckets(isJsonOutput));
       break;
 
     case "bucket": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'bucket' requires a subcommand");
         process.exit(1);
       }
       switch (sub) {
         case "create":
-          await createBucket(argv[2] ?? "", typeof argv[3] === "string" ? argv[3] : undefined);
+          await runCommand(() =>
+            createBucket(positionals[2] ?? "", typeof positionals[3] === "string" ? positionals[3] : undefined, isJsonOutput)
+          );
           break;
         case "delete":
-          await deleteBucket(argv[2] ?? "");
+          await runCommand(() => deleteBucket(positionals[2] ?? "", isJsonOutput));
           break;
         default:
           console.error(`Unknown 'bucket' subcommand: ${sub}`);
@@ -470,18 +523,18 @@ async function main(): Promise<void> {
     }
 
     case "keys":
-      await listAccessKeys();
+      await runCommand(() => listAccessKeys(isJsonOutput));
       break;
 
     case "key": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'key' requires a subcommand");
         process.exit(1);
       }
       switch (sub) {
         case "create":
-          await createAccessKey();
+          await runCommand(() => createAccessKey(undefined, isJsonOutput));
           break;
         default:
           console.error(`Unknown 'key' subcommand: ${sub}`);
@@ -492,18 +545,18 @@ async function main(): Promise<void> {
 
     // ── Kubernetes ──────────────────────────────────
     case "k8s": {
-      const sub = argv[1];
+      const sub = positionals[1];
       if (!sub) {
         console.error("Error: 'k8s' requires a subcommand");
         process.exit(1);
       }
       switch (sub) {
         case "list":
-          await listClusters();
+          await runCommand(() => listClusters(isJsonOutput));
           break;
         case "create": {
           const { values } = parseArgs({
-            args: argv.slice(2),
+            args: process.argv.slice(3),
             allowPositionals: true,
             strict: false,
             options: {
@@ -514,16 +567,21 @@ async function main(): Promise<void> {
             },
           });
           const nodeCount = typeof values.nodes === "string" ? parseInt(values.nodes, 10) : undefined;
-          await createCluster({
-            name: typeof values.name === "string" ? values.name : undefined,
-            region: typeof values.region === "string" ? values.region : undefined,
-            nodeCount,
-            k8sVersion: typeof values.version === "string" ? values.version : undefined,
-          });
+          await runCommand(() =>
+            createCluster(
+              {
+                name: typeof values.name === "string" ? values.name : undefined,
+                region: typeof values.region === "string" ? values.region : undefined,
+                nodeCount,
+                k8sVersion: typeof values.version === "string" ? values.version : undefined,
+              },
+              isJsonOutput,
+            )
+          );
           break;
         }
         case "delete":
-          await deleteCluster(argv[2] ?? "");
+          await runCommand(() => deleteCluster(positionals[2] ?? "", isJsonOutput));
           break;
         default:
           console.error(`Unknown 'k8s' subcommand: ${sub}`);
@@ -540,7 +598,4 @@ async function main(): Promise<void> {
   }
 }
 
-main().catch((err) => {
-  console.error(err instanceof Error ? err.message : String(err));
-  process.exit(1);
-});
+main();

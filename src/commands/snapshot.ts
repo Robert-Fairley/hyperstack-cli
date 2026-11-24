@@ -20,9 +20,10 @@ interface SnapshotRow {
 /**
  * List all disk snapshots in a table format.
  * Displays id, name, size, status, and source VM for each snapshot.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#get-snapshots — GET /core/snapshots
  */
-export async function listSnapshots(): Promise<void> {
+export async function listSnapshots(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/snapshots");
   const snapshots = extractSnapshotList(data);
 
@@ -34,43 +35,62 @@ export async function listSnapshots(): Promise<void> {
     vm_id: String(s.vm_id ?? "-"),
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
  * Create a snapshot from a VM's disk.
  * @param vmId — The source VM ID or name.
  * @param name — Optional display name for the snapshot.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/virtual-machines/snapshots/ — Snapshots guide
  * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#create-snapshot — Create snapshot endpoint
  */
-export async function createSnapshot(vmId: string, name?: string): Promise<void> {
+export async function createSnapshot(vmId: string, name?: string, isJsonOutput?: boolean): Promise<void> {
   const body: Record<string, unknown> = {};
   if (name) body.name = name;
 
   const result = await apiRequest(`/core/virtual-machines/${vmId}/snapshots`, "POST", body);
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Snapshot created successfully");
+  }
 }
 
 /**
  * Restore a VM from a snapshot.
  * @param snapshotId — The snapshot ID to restore from.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/virtual-machines/snapshots/ — Snapshots guide
  * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#restore-snapshot — Restore snapshot endpoint
  */
-export async function restoreFromSnapshot(snapshotId: string): Promise<void> {
+export async function restoreFromSnapshot(snapshotId: string, isJsonOutput?: boolean): Promise<void> {
   const result = await apiRequest(`/core/snapshots/${snapshotId}/restore`, "POST");
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("VM restored from snapshot successfully");
+  }
 }
 
 /**
  * Delete a snapshot.
  * @param snapshotId — The snapshot ID to delete.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/api-reference/snapshots/#delete-snapshot — DELETE /core/snapshots/{id}
  */
-export async function deleteSnapshot(snapshotId: string): Promise<void> {
+export async function deleteSnapshot(snapshotId: string, isJsonOutput?: boolean): Promise<void> {
   const result = await apiRequest(`/core/snapshots/${snapshotId}`, "DELETE");
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Snapshot deleted successfully");
+  }
 }
 
 function extractSnapshotList(data: unknown): Snapshot[] {

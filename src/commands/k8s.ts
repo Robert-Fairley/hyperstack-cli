@@ -21,9 +21,10 @@ interface ClusterRow {
 /**
  * List Kubernetes clusters in a table format.
  * Displays id, name, status, region, K8s version, and node count for each cluster.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/#get-clusters — GET /core/clusters
  */
-export async function listClusters(): Promise<void> {
+export async function listClusters(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/clusters");
   const clusters = extractClusterList(data);
 
@@ -36,7 +37,11 @@ export async function listClusters(): Promise<void> {
     nodes: c.node_count ?? 0,
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
@@ -46,6 +51,7 @@ export async function listClusters(): Promise<void> {
  * @param opts.region — Target region.
  * @param opts.nodeCount — Number of worker nodes.
  * @param opts.k8sVersion — Kubernetes version (e.g., `"1.31"`).
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/kubernetes/kubernetes-guide/ — Kubernetes guide
  * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/#create-cluster — POST /core/clusters
  */
@@ -54,7 +60,7 @@ export async function createCluster(opts?: {
   region?: string;
   nodeCount?: number;
   k8sVersion?: string;
-}): Promise<void> {
+}, isJsonOutput?: boolean): Promise<void> {
   const body: Record<string, unknown> = {};
 
   if (opts?.name) body.name = opts.name;
@@ -63,17 +69,26 @@ export async function createCluster(opts?: {
   if (opts?.k8sVersion) body.kubernetes_version = opts.k8sVersion;
 
   const result = await apiRequest("/core/clusters", "POST", body);
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Cluster created successfully");
+  }
 }
 
 /**
  * Delete a Kubernetes cluster.
  * @param clusterId — The cluster ID to delete.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/api-reference/clusters/#delete-cluster — DELETE /core/clusters/{id}
  */
-export async function deleteCluster(clusterId: string): Promise<void> {
+export async function deleteCluster(clusterId: string, isJsonOutput?: boolean): Promise<void> {
   const result = await apiRequest(`/core/clusters/${clusterId}`, "DELETE");
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Cluster deleted successfully");
+  }
 }
 
 function extractClusterList(data: unknown): K8sCluster[] {

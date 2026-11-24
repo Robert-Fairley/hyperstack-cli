@@ -31,9 +31,10 @@ interface ImageInfo {
 /**
  * List available flavors (hardware configurations).
  * Displays id, name, GPU count, vCPU, RAM, and pricing for each flavor.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/flavor/#get-flavors — GET /core/flavors
  */
-export async function listFlavors(): Promise<void> {
+export async function listFlavors(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/flavors");
   const flavors = extractFlavorList(data);
 
@@ -47,15 +48,20 @@ export async function listFlavors(): Promise<void> {
     regular_price: f.regular_price ?? "-",
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
  * List available OS images for VM provisioning.
  * Displays id, name, OS type, and public availability for each image.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/image/#get-images — GET /core/images
  */
-export async function listImages(): Promise<void> {
+export async function listImages(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/images");
   const images = extractImageList(data);
 
@@ -66,15 +72,20 @@ export async function listImages(): Promise<void> {
     public: (img as any).is_public ?? false,
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
  * List available regions for VM deployment.
  * Displays id, name, and status for each region.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/region/#get-regions — GET /core/regions
  */
-export async function listRegions(): Promise<void> {
+export async function listRegions(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/regions");
   const regions = extractRegionList(data);
 
@@ -84,7 +95,11 @@ export async function listRegions(): Promise<void> {
     status: r.status || "unknown",
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
@@ -97,6 +112,7 @@ export async function listRegions(): Promise<void> {
  * @param opts.keyName — SSH key pair name.
  * @param opts.spot — Use spot/preemptible pricing.
  * @param opts.count — Number of VMs to create (default: 1).
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/virtual-machines/getting-started/ — Getting started with VMs
  * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#create-vm — POST /core/virtual-machines
  */
@@ -108,7 +124,7 @@ export async function createVm(opts: {
   keyName?: string;
   spot?: boolean;
   count?: number;
-}): Promise<void> {
+}, isJsonOutput?: boolean): Promise<void> {
   const body: Record<string, unknown> = {};
 
   if (opts.flavorId) body.flavor_id = opts.flavorId;
@@ -120,7 +136,11 @@ export async function createVm(opts: {
   if (opts.count && opts.count > 1) body.count = opts.count;
 
   const result = await apiRequest("/core/virtual-machines", "POST", body);
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("VM created successfully");
+  }
 }
 
 function extractFlavorList(data: unknown): FlavorInfo[] {

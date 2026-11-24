@@ -22,9 +22,10 @@ interface VolumeRow {
 /**
  * List all block storage volumes in a table format.
  * Displays id, name, size, status, and attached VM for each volume.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/volume/#get-volumes — GET /core/volumes
  */
-export async function listVolumes(): Promise<void> {
+export async function listVolumes(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/volumes");
   const volumes = extractVolumeList(data);
 
@@ -36,7 +37,11 @@ export async function listVolumes(): Promise<void> {
     vm_id: String(v.vm_id ?? "-"),
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
@@ -45,6 +50,7 @@ export async function listVolumes(): Promise<void> {
  * @param opts.sizeGb — Size of the volume in gigabytes (required).
  * @param opts.name — Optional display name for the volume.
  * @param opts.region — Optional region override.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/storage/volumes/creating-a-volume/ — Creating a volume guide
  * @see https://docs.hyperstack.cloud/docs/api-reference/volume/#create-volume — POST /core/volumes
  */
@@ -52,7 +58,7 @@ export async function createVolume(opts: {
   sizeGb: number;
   name?: string;
   region?: string;
-}): Promise<void> {
+}, isJsonOutput?: boolean): Promise<void> {
   const body: Record<string, unknown> = {
     size_gb: opts.sizeGb,
   };
@@ -61,42 +67,62 @@ export async function createVolume(opts: {
   if (opts.region) body.region = opts.region;
 
   const result = await apiRequest("/core/volumes", "POST", body);
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Volume created successfully");
+  }
 }
 
 /**
  * Attach a volume to a VM.
  * @param volumeId — The volume ID to attach.
  * @param vmId — The target VM ID or name.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/storage/volumes/mounting-volume/ — Mounting volumes
  * @see https://docs.hyperstack.cloud/docs/api-reference/volume-attachment/#attach-volume — Attach volume endpoint
  */
-export async function attachVolume(volumeId: string, vmId: string): Promise<void> {
+export async function attachVolume(volumeId: string, vmId: string, isJsonOutput?: boolean): Promise<void> {
   const result = await apiRequest(`/core/volumes/${volumeId}/attach`, "POST", {
     virtual_machine_id: vmId,
   });
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Volume attached successfully");
+  }
 }
 
 /**
  * Detach a volume from its VM.
+ * @param volumeId — The volume ID to detach.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/storage/volumes/detaching-a-volume/ — Detaching volumes
  * @see https://docs.hyperstack.cloud/docs/api-reference/volume-attachment/#detach-volume — Detach volume endpoint
  */
-export async function detachVolume(volumeId: string): Promise<void> {
+export async function detachVolume(volumeId: string, isJsonOutput?: boolean): Promise<void> {
   const result = await apiRequest(`/core/volumes/${volumeId}/detach`, "POST");
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Volume detached successfully");
+  }
 }
 
 /**
  * Delete a volume.
  * @param volumeId — The volume ID to delete.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/storage/volumes/creating-a-volume/ — Volume lifecycle
  * @see https://docs.hyperstack.cloud/docs/api-reference/volume/#delete-volume — DELETE /core/volumes/{id}
  */
-export async function deleteVolume(volumeId: string): Promise<void> {
+export async function deleteVolume(volumeId: string, isJsonOutput?: boolean): Promise<void> {
   const result = await apiRequest(`/core/volumes/${volumeId}`, "DELETE");
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("Volume deleted successfully");
+  }
 }
 
 function extractVolumeList(data: unknown): Volume[] {

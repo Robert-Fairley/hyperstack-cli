@@ -24,13 +24,14 @@ interface StockRow {
  * @param opts.region — Filter by region name (case-insensitive partial match).
  * @param opts.gpu — Filter by GPU model name (case-insensitive partial match).
  * @param opts.availableOnly — If true, only show GPUs with available instances.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/stock/#get-gpu-stock — GET /core/stocks
  */
 export async function queryStock(opts: {
   region?: string;
   gpu?: string;
   availableOnly?: boolean;
-}): Promise<void> {
+}, isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/stocks");
   let list: StockRegion[];
   if (Array.isArray(data)) {
@@ -83,5 +84,9 @@ export async function queryStock(opts: {
     }
   }
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }

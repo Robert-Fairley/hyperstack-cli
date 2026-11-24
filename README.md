@@ -11,16 +11,6 @@ npm install -g .
 # Runs as: hstack
 ```
 
-### From source
-
-```bash
-git clone <repo-url>
-cd hs
-npm install
-npm run build
-# Add to PATH or symlink:
-ln -s $(pwd)/dist/cli.js /usr/local/bin/hs
-```
 
 ## Usage
 
@@ -31,22 +21,27 @@ export HYPERSTACK_API_KEY="your-key-here"
 # Optional: set SSH key path
 export HYPERSTACK_SSH_KEY=~/.ssh/llm
 
+# Global options
+hstack --help          # Show help
+hstack --json          # Output all commands as JSON (shorthand: -j)
+
 # List all VMs
 hstack status
+hstack status --json   # JSON output
 
 # Hibernate a VM (stop billing, preserve state)
 hstack hibernate i-abc123
-
-# Hibernate but keep the public IP
-hstack hibernate i-abc123 --retain-ip
+hstack hibernate i-abc123 --retain-ip   # Keep the public IP
 
 # Restore a hibernated VM
 hstack restore i-abc123
+hstack restore i-abc123 --public-ip     # Assign a new public IP
 
 # Query GPU availability
 hstack stock -g h100          # Filter by GPU model
 hstack stock -r us-east       # Filter by region
 hstack stock -a               # Available only
+hstack stock --json           # JSON output
 
 # SSH into a VM
 hstack ssh my-vm              # Default user: ubuntu

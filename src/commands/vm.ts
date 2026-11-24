@@ -22,9 +22,10 @@ interface VmInfo {
 /**
  * List all virtual machines in a table format.
  * Displays id, name, status, region, and public IP for each VM.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#get-virtual-machines — GET /core/virtual-machines
  */
-export async function listVms(): Promise<void> {
+export async function listVms(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/core/virtual-machines");
   const vms = extractVmList(data);
 
@@ -36,7 +37,11 @@ export async function listVms(): Promise<void> {
     ip: extractVmIp(vm) || "-",
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
@@ -44,28 +49,42 @@ export async function listVms(): Promise<void> {
  * Stops billing while preserving disk and memory state for fast restore.
  * @param vmId — The VM ID or name to hibernate.
  * @param retainIp — If true, keep the public IP attached after hibernation. Defaults to `false`.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/virtual-machines/hibernation/ — Hibernation guide
  * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#hibernate-vm — Hibernate VM endpoint
  */
-export async function hibernateVm(vmId: string, retainIp = false): Promise<void> {
+export async function hibernateVm(vmId: string, retainIp = false, isJsonOutput?: boolean): Promise<void> {
   const url = retainIp
     ? `/core/virtual-machines/${vmId}/hibernate?retain_ip=true`
     : `/core/virtual-machines/${vmId}/hibernate`;
 
   const result = await apiRequest(url);
-  console.log(JSON.stringify(result, null, 2));
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("VM hibernated successfully");
+  }
 }
 
 /**
  * Restore a hibernated VM.
  * Brings a previously hibernated VM back online.
  * @param vmId — The VM ID or name to restore.
+ * @param publicIp — If true, assign a public IP on restore. Defaults to `false`.
+ * @param isJsonOutput — If true, output as JSON instead of default format.
  * @see https://docs.hyperstack.cloud/docs/virtual-machines/hibernation/ — Hibernation guide
  * @see https://docs.hyperstack.cloud/docs/api-reference/virtual-machine/#restore-hibernated-vm — Restore hibernated VM endpoint
  */
-export async function restoreVm(vmId: string): Promise<void> {
-  const result = await apiRequest(`/core/virtual-machines/${vmId}/hibernate-restore`);
-  console.log(JSON.stringify(result, null, 2));
+export async function restoreVm(vmId: string, publicIp = false, isJsonOutput?: boolean): Promise<void> {
+  const params = new URLSearchParams();
+  if (publicIp) params.set("public_ip", "true");
+  const query = params.toString();
+  const result = await apiRequest(`/core/virtual-machines/${vmId}/hibernate-restore${query ? "?" + query : ""}`);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log("VM restored successfully");
+  }
 }
 
 /**

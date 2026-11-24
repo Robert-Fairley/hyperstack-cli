@@ -29,9 +29,10 @@ interface UsageRow {
 /**
  * Check account credit balance.
  * Displays current balance and currency in a table format.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/credit/#get-credit-balance — GET /billing/credit
  */
-export async function checkCredit(): Promise<void> {
+export async function checkCredit(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/billing/credit");
   const balance = data as CreditBalance | undefined;
 
@@ -40,15 +41,20 @@ export async function checkCredit(): Promise<void> {
     currency: balance?.currency ?? "USD",
   };
 
-  console.table(row);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(row, null, 2));
+  } else {
+    console.table(row);
+  }
 }
 
 /**
  * Get account billing status (alive check).
  * Returns raw API response confirming the account is active.
+ * @param isJsonOutput — Ignored; always outputs JSON.
  * @see https://docs.hyperstack.cloud/docs/api-reference/alive/ — Billing alive endpoint
  */
-export async function billingStatus(): Promise<void> {
+export async function billingStatus(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/billing/alive");
   console.log(JSON.stringify(data, null, 2));
 }
@@ -58,9 +64,10 @@ export async function billingStatus(): Promise<void> {
  * Displays date, resource type/ID, amount, and description for each billing record.
  * @param opts — Optional filters.
  * @param opts.days — Number of days to look back (not enforced by API).
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/billing/#get-billing-records — GET /billing/billing
  */
-export async function listUsage(opts?: { days?: number }): Promise<void> {
+export async function listUsage(opts?: { days?: number }, isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/billing/billing");
   const records = extractBillingList(data);
 
@@ -71,15 +78,20 @@ export async function listUsage(opts?: { days?: number }): Promise<void> {
     description: r.description || "-",
   }));
 
-  console.table(rows);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(rows, null, 2));
+  } else {
+    console.table(rows);
+  }
 }
 
 /**
  * Get dashboard summary (active VMs, hourly cost).
  * Displays a single-row table with account overview metrics.
+ * @param isJsonOutput — If true, output as JSON instead of table.
  * @see https://docs.hyperstack.cloud/docs/api-reference/dashboard/ — Dashboard endpoint
  */
-export async function getDashboard(): Promise<void> {
+export async function getDashboard(isJsonOutput?: boolean): Promise<void> {
   const data = await apiRequest("/dashboard");
   const summary = data as DashboardSummary | undefined;
 
@@ -90,7 +102,11 @@ export async function getDashboard(): Promise<void> {
     currency: summary?.currency ?? "USD",
   };
 
-  console.table(row);
+  if (isJsonOutput) {
+    console.log(JSON.stringify(row, null, 2));
+  } else {
+    console.table(row);
+  }
 }
 
 function extractBillingList(data: unknown): BillingRecord[] {

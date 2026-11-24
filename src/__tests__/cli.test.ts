@@ -723,4 +723,169 @@ describe("CLI command routing", () => {
     expect(exitSpy).toHaveBeenCalledWith(1);
     exitSpy.mockRestore();
   });
+
+  // ── --json global option tests ──────────────────────
+
+  it("routes 'status' command with --json flag", async () => {
+    process.argv = ["node", "hs", "status", "--json"];
+    
+    const mockData = { instances: [] };
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify(mockData)),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    // Should output JSON, not a table
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify(mockData.instances, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it("routes 'status' command with -j short flag", async () => {
+    process.argv = ["node", "hs", "status", "-j"];
+    
+    const mockData = { instances: [] };
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify(mockData)),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify(mockData.instances, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it("routes 'hibernate' command with --json flag", async () => {
+    process.argv = ["node", "hs", "hibernate", "vm-123", "--json"];
+    
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify({ status: "hibernating" })),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify({ status: "hibernating" }, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it("routes 'restore' command with --json flag", async () => {
+    process.argv = ["node", "hs", "restore", "vm-123", "--json"];
+    
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify({ status: "restoring" })),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify({ status: "restoring" }, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
+
+  // ── --public-ip flag tests ──────────────────────────
+
+  it("routes 'restore' command with --public-ip flag", async () => {
+    process.argv = ["node", "hs", "restore", "vm-123", "--public-ip"];
+    
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify({ status: "restoring" })),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    // Verify the API call includes public_ip=true query parameter
+    const callUrl = (fetchSpy.mock.calls[0] as [URL])[0].toString();
+    expect(callUrl).toContain("public_ip=true");
+    consoleSpy.mockRestore();
+  });
+
+  it("routes 'restore' command with --public-ip and --json flags", async () => {
+    process.argv = ["node", "hs", "restore", "vm-123", "--public-ip", "--json"];
+    
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify({ status: "restoring" })),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    // Verify both the query parameter and JSON output
+    const callUrl = (fetchSpy.mock.calls[0] as [URL])[0].toString();
+    expect(callUrl).toContain("public_ip=true");
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify({ status: "restoring" }, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it("routes 'hibernate' command with --retain-ip and --json flags", async () => {
+    process.argv = ["node", "hs", "hibernate", "vm-123", "--retain-ip", "--json"];
+    
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify({ status: "hibernating" })),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    const callUrl = (fetchSpy.mock.calls[0] as [URL])[0].toString();
+    expect(callUrl).toContain("retain_ip=true");
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify({ status: "hibernating" }, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it("routes 'stock' command with --json flag", async () => {
+    process.argv = ["node", "hs", "stock", "--json"];
+    
+    const mockData = [];
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve(JSON.stringify(mockData)),
+      headers: new Headers({ "content-type": "application/json" }),
+    } as Response);
+
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    
+    await import("../cli.js");
+    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      JSON.stringify(mockData, null, 2)
+    );
+    consoleSpy.mockRestore();
+  });
 });

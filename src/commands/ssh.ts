@@ -13,9 +13,10 @@ import { getVmIp } from "./vm.js";
  * SSH into a VM by ID or name, forwarding the terminal directly.
  * @param vmId — The VM ID or name to connect to.
  * @param user — SSH username. Defaults to `"ubuntu"`.
+ * @param isJsonOutput — Ignored; SSH always uses interactive mode.
  * @see https://docs.hyperstack.cloud/docs/network/ssh/ — SSH access guide
  */
-export async function sshToVm(vmId: string, user = "ubuntu"): Promise<void> {
+export async function sshToVm(vmId: string, user = "ubuntu", isJsonOutput?: boolean): Promise<void> {
   const ip = await getVmIp(vmId);
   const child = spawn("ssh", buildSshArgs([], `${user}@${ip}`), {
     stdio: "inherit",
@@ -32,12 +33,14 @@ export async function sshToVm(vmId: string, user = "ubuntu"): Promise<void> {
  * @param localPort — Local port to bind. Defaults to `"8000"`.
  * @param remotePort — Remote port on the VM. Defaults to `"8000"`.
  * @param user — SSH username. Defaults to `"ubuntu"`.
+ * @param isJsonOutput — Ignored; tunnel always uses interactive mode.
  */
 export async function tunnelVm(
   vmId: string,
   localPort = "8000",
   remotePort = "8000",
-  user = "ubuntu"
+  user = "ubuntu",
+  isJsonOutput?: boolean
 ): Promise<void> {
   const ip = await getVmIp(vmId);
 
